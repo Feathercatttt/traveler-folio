@@ -16,3 +16,9 @@ work/avd/
 *.apk
 *.zip
 *.tmp
+
+**/update-signing/
+
+**/*.pem
+
+work/v20-update-qa/

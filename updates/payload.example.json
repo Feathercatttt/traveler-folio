@@ -1,0 +1,19 @@
+{
+  "app": "traveler-folio",
+  "schema": 1,
+  "version": "0.20.0",
+  "published": "2026-10-16T00:56:08.298714+00:00",
+  "notes": "新增 EXE / APK 应用内更新：后台检查、三路镜像与自动换线、进度取消、签名校验。Windows 保存并重启更新；安卓确认后覆盖安装，保留角色记录。",
+  "windows": {
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.20.0/TravelerFolio-Windows-Update.zip",
+    "size": 17094161,
+    "sha256": "7e706fb3f05fb2136d12ed1118841f09ad1b03f22500fd5251bf3a57433dc081"
+  },
+  "android": {
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.20.0/TravelerFolio-Android.apk",
+    "size": 5268204,
+    "sha256": "9c30db203accd85f82a0bb8f0b92fd0b7f1dbf134d5c55983220380309fc5bdc",
+    "package": "com.traveler.folio",
+    "versionCode": 23
+  }
+}

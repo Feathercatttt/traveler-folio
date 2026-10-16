@@ -51,7 +51,7 @@ def main():
    parsed=urllib.parse.urlparse(self.path);p=parsed.path;q=urllib.parse.parse_qs(parsed.query)
    if p=='/api/session':
     if not self.valid_origin():self.send(403,{'error':'Origin not allowed'});return
-    self.send(200,{'app':'adventurer-folio-owlbear','version':'0.19','token':token,'revision':db['revision']});return
+    self.send(200,{'app':'adventurer-folio-owlbear','version':'0.20','token':token,'revision':db['revision']});return
    if p.startswith('/api/'):
     if not self.auth():return
     with lock:

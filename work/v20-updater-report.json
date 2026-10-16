@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "checks": [
+    "RSA signed manifest cross-language verification",
+    "tampered manifest rejected",
+    "unsafe archive rejected: traversal",
+    "unsafe archive rejected: absolute",
+    "unsafe archive rejected: ads",
+    "unsafe archive rejected: trailing",
+    "unsafe archive rejected: symlink",
+    "numeric version comparison",
+    "installer applies update",
+    "installer preserves unlisted data",
+    "locked file prevents partial update",
+    "failed update rolls back changed and new files",
+    "application restarts after update or rollback"
+  ],
+  "errors": []
+}

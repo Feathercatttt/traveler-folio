@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "checks": [
+    "native HTTPS download and SHA-256: gh-proxy.org",
+    "native HTTPS download and SHA-256: ghfast.top",
+    "native HTTPS download and SHA-256: ghproxy.net",
+    "native HTTPS download and SHA-256: direct",
+    "wrong-size response rejected",
+    "in-flight download cancellation"
+  ],
+  "errors": []
+}

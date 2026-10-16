@@ -8,8 +8,10 @@ for f in ['Microsoft.Web.WebView2.Core.dll','Microsoft.Web.WebView2.WinForms.dll
 shutil.copyfile(deps/'build/native/x64/WebView2Loader.dll',out/'WebView2Loader.dll')
 for p in deps.rglob('*'):
  if p.is_file() and 'LICENSE' in p.name.upper():shutil.copyfile(p,out/('WebView2-'+p.name))
-args=['C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe','/nologo','/target:winexe','/platform:x64','/optimize+','/codepage:65001','/win32manifest:'+str(source/'app.manifest'),'/win32icon:'+str(source/'folio.ico'),'/out:'+str(out/'旅人手札.exe'),'/reference:System.dll','/reference:System.Core.dll','/reference:System.Drawing.dll','/reference:System.Windows.Forms.dll','/reference:System.Web.Extensions.dll','/reference:'+str(out/'Microsoft.Web.WebView2.Core.dll'),'/reference:'+str(out/'Microsoft.Web.WebView2.WinForms.dll'),str(source/'Program.cs')]
+args=['C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe','/nologo','/target:winexe','/platform:x64','/optimize+','/codepage:65001','/win32manifest:'+str(source/'app.manifest'),'/win32icon:'+str(source/'folio.ico'),'/out:'+str(out/'旅人手札.exe'),'/reference:System.dll','/reference:System.Core.dll','/reference:System.Drawing.dll','/reference:System.Windows.Forms.dll','/reference:System.Web.Extensions.dll','/reference:'+str(out/'Microsoft.Web.WebView2.Core.dll'),'/reference:'+str(out/'Microsoft.Web.WebView2.WinForms.dll'),str(source/'Program.cs'),str(source/'Updates.cs'),str(source/'UpdateProtocol.cs'),str(source/'UpdateKey.cs')]
 r=subprocess.run(args,capture_output=True,text=True,encoding='utf8',errors='replace');print(r.stdout);print(r.stderr);assert r.returncode==0
+helper=[x for x in args if not x.endswith('.cs') and not x.startswith('/out:')]+['/reference:System.IO.Compression.dll','/reference:System.IO.Compression.FileSystem.dll','/out:'+str(out/'FolioUpdater.exe')]+[str(source/n) for n in ['Updater.cs','UpdateProtocol.cs','UpdateKey.cs']]
+r=subprocess.run(helper,capture_output=True,text=True,encoding='utf8',errors='replace');print(r.stdout);print(r.stderr);assert r.returncode==0
 runtimeInstaller=root/'work/windows-deps/WebView2Installer/MicrosoftEdgeWebView2RuntimeInstallerX64-complete.exe';runtimeInfo=root/'work/v16-runtime-info.json'
 if runtimeInstaller.exists() and runtimeInfo.exists():
  import hashlib

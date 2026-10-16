@@ -1,0 +1,66 @@
+[
+  {
+    "route": "gh-proxy.org",
+    "kind": "manifest",
+    "status": 200,
+    "seconds": 1.16,
+    "type": "text/plain; charset=utf-8",
+    "valid": true
+  },
+  {
+    "route": "gh-proxy.org",
+    "kind": "apk",
+    "status": 206,
+    "seconds": 1.5,
+    "type": "application/vnd.android.package-archive",
+    "valid": true
+  },
+  {
+    "route": "ghfast.top",
+    "kind": "manifest",
+    "status": 200,
+    "seconds": 1.34,
+    "type": "text/plain; charset=utf-8",
+    "valid": true
+  },
+  {
+    "route": "ghfast.top",
+    "kind": "apk",
+    "status": 206,
+    "seconds": 1.47,
+    "type": "application/vnd.android.package-archive",
+    "valid": true
+  },
+  {
+    "route": "ghproxy.net",
+    "kind": "manifest",
+    "status": 200,
+    "seconds": 1.52,
+    "type": "text/plain; charset=utf-8",
+    "valid": true
+  },
+  {
+    "route": "ghproxy.net",
+    "kind": "apk",
+    "status": 206,
+    "seconds": 1.7,
+    "type": "application/vnd.android.package-archive",
+    "valid": true
+  },
+  {
+    "route": "direct",
+    "kind": "manifest",
+    "status": 200,
+    "seconds": 2.33,
+    "type": "text/plain; charset=utf-8",
+    "valid": true
+  },
+  {
+    "route": "direct",
+    "kind": "apk",
+    "status": 206,
+    "seconds": 2.69,
+    "type": "application/vnd.android.package-archive",
+    "valid": true
+  }
+]

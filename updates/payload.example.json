@@ -1,19 +1,19 @@
 {
   "app": "traveler-folio",
   "schema": 1,
-  "version": "0.23.0",
-  "published": "2026-10-16T17:19:45.423300+00:00",
-  "notes": "修复怪物图鉴关闭/重复创建，新增物品法术副本；恢复原生小卡、自动连接与草稿关闭；透明横向先攻；直播立绘授权同步拖动和紧凑控制条。",
+  "version": "0.24.0",
+  "published": "2026-10-16T17:54:51.193558+00:00",
+  "notes": "全部功能统一本地插件，随手札更新；修复本地先攻样式资源遗漏；演出同层控制、缩放与结束直播；本地动画骰/优劣势/历史；独立规则条目。",
   "windows": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.23.0/TravelerFolio-Windows-Update.zip",
-    "size": 17168306,
-    "sha256": "d4c6c78db90b77096fbc95a8479a605cf23d64a28196c956c6a2376df36117b2"
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.24.0/TravelerFolio-Windows-Update.zip",
+    "size": 17166905,
+    "sha256": "29374d9910a635d1973d3b5670184645f99d7aa8b7a3f88e78b8278d0244debd"
   },
   "android": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.23.0/TravelerFolio-Android.apk",
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.24.0/TravelerFolio-Android.apk",
     "size": 5280492,
-    "sha256": "6f4500a0ccae24130fcf773f0d2db4eb3a488586c6d799563696d43dcdab2e8b",
+    "sha256": "6c62e811440fefb6b1df84d174a467a156e0c9370c0359bf96a89b9639e6cdff",
     "package": "com.traveler.folio",
-    "versionCode": 26
+    "versionCode": 27
   }
 }

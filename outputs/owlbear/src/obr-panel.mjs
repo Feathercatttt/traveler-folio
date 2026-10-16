@@ -1,5 +1,6 @@
 import {bridgeAPI21 as api,asset21,connectLocal21,backgroundOwner21} from './obr-host21.mjs';
 import {openWindow21,installWindow21} from './obr-window21.mjs';
+import {history19} from './obr-dice19.mjs';
 import {setMiniActor19} from './obr-targets19.mjs';
 import OBRTools19,{subscribeToSfx,primeAudio19} from './obr-panel-tools19.mjs';
 import {rollContext18,selectOnce18} from './obr-once-core.mjs';
@@ -39,7 +40,7 @@ function render(){
 }
 async function refresh(){
  if(busy)return;busy=true;
- try{const x=await api('/api/view?since='+revision);rooms=x.rooms;history=x.results||[];if(x.view){view=x.view;revision=x.revision;render();}
+ try{const x=await api('/api/view?since='+revision);rooms=x.rooms;history=[...new Map([...(x.results||[]),...history19().map(r=>({...r,ok:true,actorName:'',engine:r.engine||'手札动画骰'}))].map(r=>[r.id,r])).values()].sort((a,b)=>(a.time>1e11?a.time:a.time*1000)-(b.time>1e11?b.time:b.time*1000));if(x.view){view=x.view;revision=x.revision;render();}
   const room=rooms.find(r=>r.roomId===OBR.room.id)||rooms[0];$('connection').textContent=ready?(room?(room.diceReady?'枭熊已连接 · 公式确认后投骰':'枭熊已连接'):'等待本机手札连接'):'等待枭熊房间；此页可预览';
   const hist=JSON.stringify(history.map(x=>x.id));if(hist!==lastVersion){lastVersion=hist;if(tab==='history')render();const last=history.at(-1);if(last)notice((last.actorName||'')+' · '+(last.label||'掷骰')+'：'+(last.ok?last.summary:last.error));}
  }catch(err){notice(err.message);token='';}finally{busy=false;}
@@ -67,7 +68,7 @@ OBR.onReady(()=>{ready=true;render();refresh();});
 refresh();setInterval(refresh,800);
 installPanelExtras17({getView:()=>view,getActor:actor,api,notice,render,getTab:()=>tab,cardHTML});
 
-OBRTools19();
+OBRTools19();OBR.onReady(()=>OBR.broadcast.onMessage('local.adventurer-folio/tools19/dice/history-changed',()=>{if(tab==='history')void refresh();}));
 
 // The mini card uses Owlbear's native action popover, so it can be pinned.
 const size23=document.createElement('div');size23.className='mini-window23';size23.innerHTML='<button type="button" data-mini-size23="small" title="缩小速查卡" aria-label="缩小速查卡">−</button><button type="button" data-mini-size23="large" title="放大速查卡" aria-label="放大速查卡">＋</button><button type="button" data-mini-close23 title="关闭速查卡" aria-label="关闭速查卡">×</button>';document.querySelector('header').prepend(size23);

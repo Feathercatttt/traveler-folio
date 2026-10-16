@@ -15,7 +15,7 @@ const send=(data,destination='ALL')=>OBR.broadcast.sendMessage(CMD19,{id:crypto.
 export function updateToolsView19(view){lastView=view;}
 export async function openTools19(tab='settings'){await openWindow21(NS19+'/panel','tools19.html?tab='+tab,{width:500,height:700});}
 export async function openHP19(){await openWindow21(NS19+'/hp','tools19.html?tab=hp&compact=1',{width:270,height:128,x:16,y:160,minWidth:230,minHeight:112,glass:true});}
-async function openInitiativeBar19(){const w=await OBR.viewport.getWidth();await openWindow21(NS19+'/initiative-bar','tools19.html?tab=initiative&bar=1',{width:720,height:154,x:Math.max(8,(w-720)/2),y:45,minWidth:330,minHeight:38,hideHeader:true,resize:false,hidePaper:true});}
+async function openInitiativeBar19(){const w=await OBR.viewport.getWidth();await openWindow21(NS19+'/initiative-bar','tools19.html?tab=initiative&bar=1',{width:720,height:164,x:Math.max(8,(w-720)/2),y:45,minWidth:330,minHeight:38,hideHeader:true,resize:false,hidePaper:true,resetSize:true});}
 async function syncInitiativeBar19(){if(!await OBR.scene.isReady())return;const s=meta[INIT19],show=!!(settings().initiative&&(s?.active||s?.preparing));if(show===!!barKey)return;if(show){barKey=true;try{await openInitiativeBar19();}catch(err){barKey=false;throw err;}}else{barKey=false;await closeWindow21(NS19+'/initiative-bar');}}
 async function write19(key,value){await OBR.scene.setMetadata({[key]:value});meta={...meta,[key]:value};}
 async function center19(point,scale){await OBR.player.deselect().catch(()=>{});const [width,height]=await Promise.all([OBR.viewport.getWidth(),OBR.viewport.getHeight()]);scale=clamp19(scale??await OBR.viewport.getScale(),.05,8);await OBR.viewport.animateTo({position:{x:width/2-point.x*scale,y:height/2-point.y*scale},scale});}
@@ -66,7 +66,7 @@ let surfaceSerial21=Promise.resolve(),filterError21='';function surfaces19(){sur
 async function surfacesImpl21(){const c=settings(),live=!!(c.theatre&&meta[STAGE19]?.live);
  await syncFilter21(live?stageState21(meta[STAGE19]).filter:'none').catch(e=>{console.warn('舞台滤镜',e);if(filterError21!==e.message){filterError21=e.message;OBR.notification.show('地图滤镜未能显示：'+e.message+'；可切回原色，立绘仍可使用。','WARNING').catch(()=>{});}});
  if(live!==!!stageKey){await OBR.modal.close(NS19+'/stage-display').catch(()=>{});if(live)await OBR.modal.open({id:NS19+'/stage-display',url:asset21('surface19.html?mode=stage'),fullScreen:true,hidePaper:true,hideBackdrop:true,disablePointerEvents:false});stageKey=live?'live':'';}
- if(live!==cueKey){cueKey=live;if(live)await openWindow21(NS19+'/stage-cue21','tools19.html?tab=theatre&cue=1',{width:430,height:124,x:16,y:88,minWidth:290,minHeight:108,glass:true,resetSize:true});else await closeWindow21(NS19+'/stage-cue21');}
+ if(live!==cueKey){cueKey=live;await closeWindow21(NS19+'/stage-cue21');}
 }
 async function syncInitiative19(){if(!authority())return;const state=meta[INIT19];if(!state?.entries?.length)return;let changed=false;const entries=state.entries.map(r=>{const token=items.find(i=>i.id===r.tokenId);if(!token||r.override)return r;const bonus=initiativeBonus19(token),hidden=token.visible===false;if(r.bonus===bonus&&r.hidden===hidden)return r;changed=true;return {...r,bonus,hidden,total:r.total===null?null:r.total-r.bonus+bonus};});if(changed)await write19(INIT19,{...state,entries});}
 // Targeted compatibility adaptation: only Dynamic Fog / Smoke vision metadata is suspended.

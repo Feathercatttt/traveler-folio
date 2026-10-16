@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "checks": [
+    "Real HTTP loads 21 referenced plugin assets, including both previously omitted styles; release handshake is v0.24",
+    "Both local manifests run the real SDK/bundles through one shared background owner",
+    "Actual local iframe composites fully transparent over map; 30 large portraits stay constrained after combat starts",
+    "Interactive fullscreen layer blocks outside controls as in the reported bug; its own cue can resize, switch expressions, enter/leave and end live, restoring map access",
+    "Card formula -> actual confirmation iframe -> advantage/disadvantage -> built-in dice animation -> mini history, using only served release files",
+    "Local tool reads the folio bestiary and places a monster with independent Stat Bubbles HP"
+  ],
+  "errors": [],
+  "failed": [],
+  "unknown": []
+}

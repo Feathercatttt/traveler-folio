@@ -11,3 +11,5 @@
 .advantage21{display:flex;gap:6px;margin:9px 0}.advantage21 button{flex:1;padding:8px;font-weight:700}.advantage21 [aria-pressed=true]{background:var(--primary);color:var(--onPrimary);border-color:var(--gold)}body.window21 form{overflow:auto;min-height:0;flex:1}body.window21>header{display:none}
 
 .mini-window23{display:flex;gap:4px;float:right}.mini-window23 button{width:28px;min-width:28px;height:28px;min-height:28px;padding:0;font-size:17px}.empty p{overflow-wrap:anywhere}
+
+header>.mini-window23{order:4;flex:0 0 auto;margin-left:auto;gap:3px}header>.mini-window23 button{flex:none}

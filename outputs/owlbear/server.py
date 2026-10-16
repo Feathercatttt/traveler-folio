@@ -12,7 +12,7 @@ def main():
  parser.add_argument('--data-dir',type=Path)
  args=parser.parse_args()
  handoff=TransferService(args.port+1)
- here=Path(__file__).resolve().parent;folder=here.parent
+ here=Path(__file__).resolve().parent;folder=here.parent;plugin=json.loads((here/'plugin-version.json').read_text(encoding='utf8'))
  data=(args.data_dir or here/'user-data').resolve();data.mkdir(parents=True,exist_ok=True)
  cache=data/'state.json';lock=threading.RLock();token=secrets.token_urlsafe(32)
  db={'revision':0,'raw':None,'view':None,'updated':0,'onceJournal18':{}};backgrounds={};last_main=[0];commands=[];jobs=[];results=[];seen={}
@@ -24,6 +24,10 @@ def main():
  paths={'/manifest.json':here/'manifest.json','/panel.html':here/'panel.html','/panel.js':here/'panel.js','/background.html':here/'background.html','/background.js':here/'background.js','/style.css':here/'style.css','/icon.svg':here/'icon.svg','/card.html':folder/'旅人手札.html','/':here/'install.html','/install.html':here/'install.html','/roll.html':here/'roll.html','/roll.js':here/'roll.js','/LICENSE-sdk.txt':here/'LICENSE-sdk.txt'}
  for name in ['tools-manifest.json','launcher21.html','launcher21.js','connect21.html','results21.html','results21.js','status18.html','status18.js','tools19.html','tools19.css','tools19.js','surface19.html','surface19.js','tools19.svg','heart19.svg','target19.svg','dice-effect19.html','dice-effect19.js','LICENSE-suite19.txt','THIRD-PARTY19.txt']:paths['/'+name]=here/name
  for name in ['d4.png','d6.png','d8.png','d10.png','d12.png','d20.png','d100.png','dice.mp3','cartoon.mp3']:paths['/suite19/'+name]=here/'suite19'/name
+ # Serve every public root asset; new styles cannot be silently omitted from a manual list.
+ for asset in here.iterdir():
+  if asset.is_file() and asset.suffix in ('.html','.js','.css','.svg'):paths['/'+asset.name]=asset
+ paths['/plugin-version.json']=here/'plugin-version.json'
  allowed={'null','https://feathercatttt.github.io','https://owlbear.app','https://www.owlbear.app','https://owlbear.rodeo','https://www.owlbear.rodeo',f'http://localhost:{args.port}',f'http://127.0.0.1:{args.port}'}
  def persist():
   temp=cache.with_suffix('.tmp');temp.write_text(json.dumps(db,ensure_ascii=False,separators=(',',':')),encoding='utf-8');temp.replace(cache)
@@ -32,7 +36,7 @@ def main():
   def log_message(self,*a):pass
   def send(self,code,payload,kind='application/json; charset=utf-8'):
    body=payload if isinstance(payload,bytes) else json.dumps(payload,ensure_ascii=False,separators=(',',':')).encode('utf-8')
-   self.send_response(code);self.send_header('Content-Type',kind);self.send_header('Content-Length',str(len(body)));self.send_header('Cache-Control','no-store');self.send_header('X-Content-Type-Options','nosniff')
+   self.send_response(code);self.send_header('Content-Type',kind);self.send_header('Content-Length',str(len(body)));self.send_header('Cache-Control','no-store');self.send_header('X-Content-Type-Options','nosniff');self.send_header('X-Folio-Version',plugin['version'])
    origin=self.headers.get('Origin')
    if origin in allowed:self.send_header('Access-Control-Allow-Origin',origin);self.send_header('Vary','Origin')
    self.send_header('Access-Control-Allow-Private-Network','true')
@@ -51,7 +55,7 @@ def main():
    parsed=urllib.parse.urlparse(self.path);p=parsed.path;q=urllib.parse.parse_qs(parsed.query)
    if p=='/api/session':
     if not self.valid_origin():self.send(403,{'error':'Origin not allowed'});return
-    self.send(200,{'app':'adventurer-folio-owlbear','version':'0.21','token':token,'revision':db['revision']});return
+    self.send(200,{'app':'adventurer-folio-owlbear','version':plugin['version'],'protocol':plugin['protocol'],'pluginVersion':plugin['version'],'token':token,'revision':db['revision']});return
    if p.startswith('/api/'):
     if not self.auth():return
     with lock:

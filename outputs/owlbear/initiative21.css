@@ -33,3 +33,10 @@ body.bar19{background:transparent!important}body.bar19>header,body.bar19>nav,bod
 html:has(body.bar19),body.bar19,body.bar19 main,body.bar19 #content19,.bar19 .suite-init21,.bar19 .app-hbar,.bar19 .hbar-row,.bar19 .hbar-cluster{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
 .bar19 .initiative-list{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;touch-action:pan-x;scroll-behavior:auto;padding-bottom:16px}
 .bar19 .initiative-item{flex-shrink:0}.bar19 .hbar-row-items{justify-content:flex-start;min-height:0}.bar19 .initiative-phase,.bar19 .init-display-mode{background:rgba(24,28,38,.86);border-radius:5px;padding:3px 5px}
+
+/* The iframe canvas also needs a neutral color scheme to remain transparent. */
+html.bar24,html.bar24 body{color-scheme:normal!important;background:transparent!important;background-color:transparent!important}
+html.bar24 body{margin:0;overflow:hidden}html.bar24 body main,html.bar24 #content19,html.bar24 .suite-init21,html.bar24 .app-hbar,html.bar24 .hbar-row,html.bar24 .hbar-cluster,html.bar24 .initiative-list{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+.suite-init21 .initiative-item{min-width:56px;max-width:56px;flex:0 0 56px;height:80px}.suite-init21 .initiative-item.active{height:94px}
+.suite-init21 .item-img{min-width:0;max-width:100%;max-height:80%;margin:0}.suite-init21 .item-img img{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;min-width:0;object-fit:cover!important;object-position:50% 20%}
+.suite-init21 .initiative-list label{margin:0}.suite-init21 .hbar-row-items{padding-bottom:2px}.bar24 .initiative-list{padding-bottom:19px}

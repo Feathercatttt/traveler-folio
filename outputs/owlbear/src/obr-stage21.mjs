@@ -18,7 +18,7 @@ export function stageCommand21(raw,x,sender){const s=structuredClone(stageState2
   else if(x.type==='stage-position'){
    if(!s.live||!c.enabled||!c.visible)throw Error('只能移动直播中正在显示的立绘');
    if(!Number.isFinite(x.position?.x)||!Number.isFinite(x.position?.y))throw Error('立绘位置无效');
-   c.position23={x:Math.max(.04,Math.min(.96,x.position.x)),y:Math.max(.12,Math.min(1,x.position.y))};
+   c.position23={x:Math.max(.04,Math.min(.96,x.position.x)),y:Math.max(.12,Math.min(1,x.position.y))};if(x.scale24!==undefined){if(!Number.isFinite(x.scale24))throw Error('立绘缩放无效');c.scale24=Math.max(.25,Math.min(2.5,x.scale24));}
   }
   else if(x.type==='stage-expression'){if(Number.isInteger(x.index)&&x.index>=0&&x.index<c.expressions.length)c.expression=x.index;if(x.effect!==undefined)c.effect=choose(effects21,x.effect);}
   else if(x.type==='stage-move'){requireGM();const at=s.roster21.indexOf(c),to=Math.max(0,Math.min(s.roster21.length-1,at+(x.direction===-1?-1:1)));s.roster21.splice(at,1);s.roster21.splice(to,0,c);}

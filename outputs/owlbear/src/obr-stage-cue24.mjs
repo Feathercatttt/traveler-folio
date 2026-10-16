@@ -1,0 +1,7 @@
+import {canStage21} from './obr-stage21.mjs';
+import {esc19 as e} from './obr-tools-model19.mjs';
+
+export function stageCue24(s,me){
+ const rows=s.roster21.filter(c=>c.enabled&&canStage21(c,me));
+ return '<div class="stage-dock21"><span class="fi-live-indicator"><i class="fi-live-dot"></i>正在直播</span><div class="stage-dock-rail21">'+rows.map(c=>{const r=c.expressions[c.expression]||c.expressions[0];return '<div class="fi-dock-portrait '+(c.visible?'fi-dock-active':'')+'"><button type="button" class="stage-dock-actor21" data-cue24="toggle" data-performer="'+e(c.id)+'" title="点击上下场，右键下场" aria-label="'+e(c.name)+(c.visible?'下场':'上场')+'" '+(!r?'disabled':'')+'>'+(r?'<img src="'+e(r.url)+'" alt="">':'＋')+'</button><span class="fi-dock-name">'+e(c.name)+'</span>'+(c.expressions.length>1?'<select data-cue-expression24="'+e(c.id)+'" aria-label="'+e(c.name)+'差分">'+c.expressions.map((r,i)=>'<option value="'+i+'" '+(i===c.expression?'selected':'')+'>'+e(r.name)+'</option>').join('')+'</select>':'')+'</div>';}).join('')+'</div>'+(me?.role==='GM'?'<button type="button" class="stage-end-live21" data-cue24="end">结束直播</button>':'')+'</div>';
+}

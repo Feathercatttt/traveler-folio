@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "version": "0.21.0",
+  "release": "https://github.com/Feathercatttt/traveler-folio/releases/tag/v0.21.0",
+  "pages": "https://feathercatttt.github.io/traveler-folio/",
+  "sourceCommit": "fcc26a88583db6114a9c33955c7090bfcbb1c2f1",
+  "manifestCommit": "d15eb95bbb3c9bc8a3eae435733c71df4557f4cb",
+  "releaseAssetCount": 10,
+  "localChecks": 58,
+  "publicStaticFiles": 39,
+  "SkSLCompilerChecks": 8,
+  "liveNativeUpdateChecks": 5,
+  "mirrorAPKDownloads": 4,
+  "notes": [
+    "Both independent extension URLs publicly verified",
+    "Original APK signing key and update key retained",
+    "No real authenticated Owlbear room or physical phone test"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "checks": [
+    "SkSL compiled: none",
+    "SkSL compiled: memory",
+    "SkSL compiled: noir",
+    "SkSL compiled: ghost",
+    "SkSL compiled: warm",
+    "SkSL compiled: dream",
+    "SkSL compiled: rain",
+    "SkSL compiled: glitch"
+  ],
+  "errors": [],
+  "compiler": "0.42.0",
+  "limits": [
+    "Compilation test only; Owlbear GPU/runtime execution remains untested"
+  ]
+}

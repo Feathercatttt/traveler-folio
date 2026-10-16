@@ -1,0 +1,246 @@
+{
+  "success": true,
+  "url": "https://feathercatttt.github.io/traveler-folio/",
+  "checks": [
+    "Anonymous public HTTPS assets match local output after CRLF/LF normalization",
+    "Both independent manifests use hosted absolute URLs",
+    "No frame-blocking response headers",
+    "Actions builds source and deploys a static whitelist"
+  ],
+  "files": [
+    {
+      "name": "background.html",
+      "size": 147,
+      "sha256": "1641996f86bda75dc87c1cc3697cf58b5ce5ec378b2615bc7120521f35c9e6a3",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "background.js",
+      "size": 120659,
+      "sha256": "ec5b5ac7b6ffb82db9ac3c74772aaf054b8579cf289a819cdbedae09b5e001c3",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "dice-effect19.html",
+      "size": 14375,
+      "sha256": "8d1ca94959fc7183aa5c9f1cee5bc50b523f5373b53e98ec026309e8680de5a8",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "dice-effect19.js",
+      "size": 85120,
+      "sha256": "ff07a8dd8c34a27c0212211db70657bd8cfb256c5351d390dfcd668248bea559",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "heart19.svg",
+      "size": 222,
+      "sha256": "a00b392bd29e18d5b5d05a6c923921d6ea147fa62ad4a8d629e19dd4853612bf",
+      "contentType": "image/svg+xml"
+    },
+    {
+      "name": "icon.svg",
+      "size": 258,
+      "sha256": "eb29d5951fd7e7e9846e10f2c402b4e2ffb7c0a88b052f98bab8f885677ffabc",
+      "contentType": "image/svg+xml"
+    },
+    {
+      "name": "index.html",
+      "size": 4081,
+      "sha256": "a896bf0e611138c2b56404bb16434830b5b2ab107672a12207857286c7259917",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "launcher21.html",
+      "size": 377,
+      "sha256": "b0e56a6c023858a0ad9d0dc9b57bdbe2b9a8d5b2f928f6f0c29c75033de5fbc7",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "launcher21.js",
+      "size": 59262,
+      "sha256": "10a7e3b06c996b957a563a5ef360647f2ff7d9bb2664132b72b318e49ede6012",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "LICENSE-sdk.txt",
+      "size": 1065,
+      "sha256": "5d19a1912b59cc94d00b1b0b8c62ab323ea098a8aec3f6098a215743fbfc32d2",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "name": "LICENSE-suite19.txt",
+      "size": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "name": "manifest.json",
+      "size": 622,
+      "sha256": "4c3295c7cc7622fd562e447e426ab545424104517ed2b3e06fafa66d42e711ac",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "name": "panel.html",
+      "size": 1884,
+      "sha256": "b397a5f05c6b8518af7d30c5324c77a1e2da15ca9dc88764367882dca755f3dc",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "panel.js",
+      "size": 98917,
+      "sha256": "bcdd25a18dcd43aebe7f1f8c234721caa720eccb50fa506b2b12de9425a64122",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "results21.html",
+      "size": 987,
+      "sha256": "b5b0be54f9b05112a503dc4af0824872a8a23df8f8c866258ed92c79332292a5",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "results21.js",
+      "size": 58899,
+      "sha256": "a0efa68b8316c24f2d192fe36cde0dc96aaa1265b2c9faaaa0144d62f7816d2b",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "roll.html",
+      "size": 2838,
+      "sha256": "243538f57ff15495995d50d0f130a102b6996e2420b2d5768ca629d5e3b28488",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "roll.js",
+      "size": 79256,
+      "sha256": "f70fc0f21ce941545322e2318cf9e1be6d87cbeced82015c56dd063776c3cf84",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "status18.html",
+      "size": 717,
+      "sha256": "11123b1514c90a798caccf5b3491c33f08543531c7321ba4a405a1f24dd023cf",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "status18.js",
+      "size": 56887,
+      "sha256": "881d4fee9d4f7208b5977470322223fa614a989eeca2d652aa5f13ddac561a70",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "style.css",
+      "size": 6861,
+      "sha256": "e5a23e5b4ee67c16d4f1c581d768c4a10a82985a8b695154d8f3de426dddfd34",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "name": "surface19.html",
+      "size": 2657,
+      "sha256": "6a0bef1b1fe9688c649c6f5af783089ab65e121ef5bd465e5521431bee507a65",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "surface19.js",
+      "size": 58076,
+      "sha256": "019f44171231e6792c11b95890a74e20dea47e306b84936920daccc6ebf9c8de",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "target19.svg",
+      "size": 217,
+      "sha256": "b7703a201a5e6e3b90a1f3f86f21fd876500b51885bd52e8dffd89c77b7adbf2",
+      "contentType": "image/svg+xml"
+    },
+    {
+      "name": "THIRD-PARTY19.txt",
+      "size": 624,
+      "sha256": "85b7abc79460a499056869fcbe086c069fbe8a27781539bf0fb6dcd99dc11e1b",
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "name": "tools-manifest.json",
+      "size": 627,
+      "sha256": "1184029d7cb85a5a99a5b6a3a70f4fc759408d0a1a410000cd372277ad2eef1a",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "name": "tools19.css",
+      "size": 10512,
+      "sha256": "cb6f76cb0954e41124ad8f3966518fc34c42bf1e40a98c2724e3a471d7de1787",
+      "contentType": "text/css; charset=utf-8"
+    },
+    {
+      "name": "tools19.html",
+      "size": 643,
+      "sha256": "7590a035bf4bd37bc470e4c44a5bdb6dcb09df9e1641a18a8b31c39d9f7ecb55",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "tools19.js",
+      "size": 124215,
+      "sha256": "e01511211a4365b21a6d8185e33d60f50525809b5541757209ff79f5cac9a6bf",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "tools19.svg",
+      "size": 232,
+      "sha256": "42cfa283db9bf1786e1fd3efd967873040ce652b2318bd11619c3a4d4a038c3b",
+      "contentType": "image/svg+xml"
+    },
+    {
+      "name": "suite19/cartoon.mp3",
+      "size": 65280,
+      "sha256": "c482707ffcdca824886584416780262f88625234a48a6a7fb311954fe7e03b6a",
+      "contentType": "audio/mp3"
+    },
+    {
+      "name": "suite19/d10.png",
+      "size": 17530,
+      "sha256": "283de4f3767d0f68680ebb0b2baec83c01539b4c3ca7e5244240b9a4ec56a71a",
+      "contentType": "image/png"
+    },
+    {
+      "name": "suite19/d100.png",
+      "size": 11720,
+      "sha256": "6f7b0de50f5f3be442a1963e03d8453893a959611905c0a337d100cabf2afc65",
+      "contentType": "image/png"
+    },
+    {
+      "name": "suite19/d12.png",
+      "size": 14326,
+      "sha256": "7766e3e0f9052ef7b4474956ff7b49fdd8060185cf080a7b108211ad1c4cbe5a",
+      "contentType": "image/png"
+    },
+    {
+      "name": "suite19/d20.png",
+      "size": 16375,
+      "sha256": "a4b932d681d1f3c0f455774ef0c9f2b68ae18799a3758dc879620dadfd9d15fd",
+      "contentType": "image/png"
+    },
+    {
+      "name": "suite19/d4.png",
+      "size": 16179,
+      "sha256": "b1d14932213007af1bccf32445cb1a8366c11f72d234d15c6c96ade9123770fc",
+      "contentType": "image/png"
+    },
+    {
+      "name": "suite19/d6.png",
+      "size": 4542,
+      "sha256": "9e63305eb7d6a7b5a73ec92343104f80bc4da505b740566aed215e0008bfa2fc",
+      "contentType": "image/png"
+    },
+    {
+      "name": "suite19/d8.png",
+      "size": 16742,
+      "sha256": "c89f4586afae071dd29d207657ab3eaa88a533d3524ee62a1da73fcf0ccf6146",
+      "contentType": "image/png"
+    },
+    {
+      "name": "suite19/dice.mp3",
+      "size": 15840,
+      "sha256": "a0874599e7b53b2043bed860f048d0bb2e407630beee8b4e0d5ab8ce956512c1",
+      "contentType": "audio/mp3"
+    }
+  ]
+}

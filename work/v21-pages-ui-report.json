@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "checks": [
+    "Live HTTPS install page copies correct independent manifest URLs",
+    "Desktop and mobile install page have no horizontal overflow"
+  ],
+  "errors": []
+}

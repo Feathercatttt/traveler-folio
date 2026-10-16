@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "checks": [
+    "Live update metadata verifies with original release public key",
+    "Published v0.21 APK downloads match signed size and SHA-256 on available routes"
+  ],
+  "routes": [
+    {
+      "route": "https://gh-proxy.org/",
+      "manifestVersion": "0.21.0",
+      "signatureValid": true,
+      "success": true,
+      "apkBytes": 5272300,
+      "apkSHA256": "168f1d5556eea6b0bb97a52b69bd359ba4767fb47a6dccd9d565df7c5b00ed9c"
+    },
+    {
+      "route": "https://ghfast.top/",
+      "manifestVersion": "0.21.0",
+      "signatureValid": true,
+      "success": true,
+      "apkBytes": 5272300,
+      "apkSHA256": "168f1d5556eea6b0bb97a52b69bd359ba4767fb47a6dccd9d565df7c5b00ed9c"
+    },
+    {
+      "route": "https://ghproxy.net/",
+      "manifestVersion": "0.21.0",
+      "signatureValid": true,
+      "success": true,
+      "apkBytes": 5272300,
+      "apkSHA256": "168f1d5556eea6b0bb97a52b69bd359ba4767fb47a6dccd9d565df7c5b00ed9c"
+    },
+    {
+      "route": "GitHub direct",
+      "manifestVersion": "0.21.0",
+      "signatureValid": true,
+      "success": true,
+      "apkBytes": 5272300,
+      "apkSHA256": "168f1d5556eea6b0bb97a52b69bd359ba4767fb47a6dccd9d565df7c5b00ed9c"
+    }
+  ],
+  "limits": [
+    "Reachability measured from development PC; not all China carriers or permanent mirror uptime"
+  ]
+}

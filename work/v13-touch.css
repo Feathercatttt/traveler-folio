@@ -1,0 +1,4 @@
+/* Touch scrolling stays native; choosing an option waits for a completed tap. */
+.ref8-list{touch-action:pan-y pinch-zoom;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
+.ref8-option{touch-action:pan-y pinch-zoom;-webkit-user-select:none;user-select:none}
+@media(pointer:coarse){.ref8-title small{font-size:11px}.ref8-option{min-height:48px}}

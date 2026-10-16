@@ -1,0 +1,2 @@
+import OBR from '@owlbear-rodeo/sdk';
+OBR.onReady(async()=>{const id=new URLSearchParams(location.search).get('id'),items=await OBR.scene.items.getItems([id]),item=items[0],meta=item?.metadata?.['local.adventurer-folio/marked-status'];document.getElementById('name').textContent=item?.name||'状态已移除';const host=document.getElementById('effects');host.textContent='';for(const text of meta?.tooltip18||['此标记已移除或没有额外数值影响。']){const p=document.createElement('p');p.textContent=text;host.append(p);}});

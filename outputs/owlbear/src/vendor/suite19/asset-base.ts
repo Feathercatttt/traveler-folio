@@ -1,0 +1,1 @@
+export const assetUrl=(p:string)=>new URL('/suite19/'+p,location.origin).href;

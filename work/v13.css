@@ -1,0 +1,27 @@
+/* Desktop styles stay as they were. Native host actions are managed by the application. */
+#mobileDock13{display:none}
+.transfer13-label{display:block;font-weight:650;margin:12px 0 7px}.transfer13-label select{display:block;width:100%;margin-top:6px}
+.transfer13-tools{display:flex;gap:12px;align-items:flex-end;margin:16px 0}.transfer13-tools label{flex:1}.transfer13-tools select{display:block;width:100%;margin-top:6px}
+#transferInput13{width:100%;min-height:140px;font:500 13px/1.6 Consolas,monospace;overflow-wrap:anywhere;word-break:break-all;resize:vertical}
+.transfer13-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.transfer13-buttons .btn{min-height:40px}
+.transfer13-preview{max-height:240px;overflow:auto;border:1px solid var(--line);border-radius:8px;padding:5px 14px}.transfer13-preview p{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:10px}.transfer13-preview span{color:var(--muted);font-size:12px}
+#transferMessage13.error{color:var(--red)}
+.platform-windows13 .floating-browser-btn,.platform-windows13 [data-action="floating-help"],.platform-windows13 [data-action="owl-connect"]{display:none!important}
+.mobileMore13{display:grid;gap:10px}.mobileMore13 button{text-align:left;justify-content:flex-start;min-height:48px}
+#mobileQuick13{padding:0;border:1px solid var(--line);border-radius:16px 16px 0 0;max-width:560px;width:100%;height:min(88dvh,850px);max-height:88dvh;margin:auto auto 0;background:var(--paper);overflow:hidden}
+#mobileQuick13 iframe{display:block;border:0;width:100%;height:100%}#mobileQuick13::backdrop{background:#20180e77}
+@media(max-width:700px){
+ body{padding-bottom:calc(74px + env(safe-area-inset-bottom,0px))!important}
+ .page-heading .heading-tools{display:none!important}.topbar{min-height:52px!important;padding:8px 16px!important;gap:8px!important}.topbar .actions>.btn{display:none!important}.topbar .actions{width:auto!important;margin-left:auto;flex:0 0 auto!important}.save-status{font-size:11px!important;white-space:nowrap}.topbar .breadcrumb{font-size:13px!important;min-width:0}.page-heading{margin-bottom:14px!important}.page-heading h2{font-size:22px!important}.page-heading p{font-size:12px!important;margin-top:5px!important}
+ #mobileDock13{position:fixed;z-index:45;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--paper);box-shadow:0 -3px 16px #24160b12}
+ #mobileDock13 button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:48px;min-width:0;padding:3px 0;border:0;background:transparent;color:var(--brown,var(--ink));font-size:11px!important;font-weight:650!important;border-radius:7px;cursor:pointer}
+ #mobileDock13 button .i{width:19px;height:19px}#mobileDock13 button:active{background:var(--panel);transform:translateY(1px)}#mobileDock13 button:focus-visible{outline:2px solid var(--gold)}
+ .mobile-editing13 #mobileDock13{display:none}.mobile-editing13{padding-bottom:12px!important}
+ #editorDialog{max-height:calc(100dvh - 20px)!important}.transfer13-tools{flex-direction:column;align-items:stretch;gap:8px}.transfer13-tools .btn{min-height:44px}.transfer13-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}.transfer13-buttons .btn{justify-content:center;min-height:44px;font-size:12px!important}.transfer13-preview p{display:block}.transfer13-preview span{display:block;margin-top:4px}
+ .mobileMore13 button{font-size:14px!important}
+}
+@media print{#mobileDock13,#mobileQuick13{display:none!important}body{padding-bottom:0!important}}
+
+.side-data13{display:flex;gap:8px;align-items:center}.sidebar .side-data13 .side-link{flex:1 1 auto;white-space:nowrap;font-size:12px;padding:10px 5px;gap:6px;min-height:44px}.sidebar .side-data13 .side-transfer13{flex:0 0 auto;border:1px dashed #9d8054;border-radius:6px}.side-data13 .i{width:16px;height:16px}
+
+.side-data13{width:100%;min-width:0}.sidebar .side-data13 .side-link{width:auto;min-width:0}.sidebar .side-data13 .side-transfer13{flex:0 0 56px;width:56px;max-width:56px;padding:10px 2px}

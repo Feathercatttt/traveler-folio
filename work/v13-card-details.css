@@ -1,0 +1,14 @@
+.attached-card>.description133{margin-top:8px;padding-top:0}
+.description133>summary{display:flex;align-items:center;gap:10px;list-style:none;min-height:44px;line-height:1.75;min-width:0}
+.description133>summary::-webkit-details-marker{display:none}
+.description133-preview{display:block;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;font-weight:500;color:var(--muted)}
+.description133-toggle{display:inline-flex;align-items:center;gap:5px;flex:none;font-size:12px;font-weight:700;color:var(--gold)}
+.description133-toggle:after{content:'›';font-size:19px;line-height:1;transform:rotate(90deg)}
+.description133 .description133-less{display:none}
+.description133[open] .description133-more{display:none}
+.description133[open] .description133-less{display:inline}
+.description133[open] .description133-toggle:after{transform:rotate(-90deg)}
+.description133>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:3px}
+.description133>.trait-effects{margin:8px 0 10px;padding-top:10px}
+.description133>.trait-effects .effect-tools{min-height:36px}
+@media print{.description133>summary{display:none}.description133>.trait-effects{display:block}}

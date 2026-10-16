@@ -1,0 +1,16 @@
+{
+  "name": "旅人手札 · 角色卡与跑团工具",
+  "version": "0.19.0",
+  "manifest_version": 1,
+  "author": "旅人手札",
+  "description": "卡片与Stat Bubbles联动；内置动画骰、多目标确认、先攻、怪物图鉴、场景与立绘工具。所有伤害均手动扣血。",
+  "icon": "/icon.svg",
+  "action": {
+    "title": "旅人手札",
+    "icon": "/icon.svg",
+    "popover": "/panel.html",
+    "width": 440,
+    "height": 720
+  },
+  "background_url": "/background.html"
+}

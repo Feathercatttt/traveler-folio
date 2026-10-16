@@ -1,0 +1,7 @@
+旅人手札枭熊扩展：GPL-3.0-or-later。
+动画与合成音效改编自 FullPeople/obr-suite，提交 2b91206610066716121f73c672c8ee3661e0839a
+原作者 https://github.com/FullPeople/obr-suite
+对应源码在 src/vendor/suite19，构建命令 npm run build。
+演出功能参考用户提供的 Visual Novel Maker v1.4.1 的行为，独立实现，未复制其源码或美术资产。
+Owlbear SDK 及其他依赖见各自许可证。
+骰子碰撞音效：freesound_community (ksjsbwuil), Pixabay；从 obr-suite public/dice.mp3 与 cartoon.mp3 保留，遵循原始音效许可。合成音效代码遵循 GPL。

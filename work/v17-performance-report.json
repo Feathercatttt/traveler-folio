@@ -1,0 +1,57 @@
+{
+  "success": true,
+  "checks": [
+    "同一80特性样本，三个卡面切换耗时均比0.14降低至少30%",
+    "优化前后AC一致，导航保持正确指针"
+  ],
+  "results": [
+    {
+      "version": "0.14",
+      "traits": 80,
+      "rows": [
+        {
+          "tab": "traits",
+          "ms": 2225.7999999970198,
+          "ac": 96,
+          "cursor": "pointer"
+        },
+        {
+          "tab": "inventory",
+          "ms": 1936.3000000044703,
+          "ac": 96,
+          "cursor": "pointer"
+        },
+        {
+          "tab": "overview",
+          "ms": 1990,
+          "ac": 96,
+          "cursor": "pointer"
+        }
+      ]
+    },
+    {
+      "version": "0.17",
+      "traits": 80,
+      "rows": [
+        {
+          "tab": "traits",
+          "ms": 165.20000000298023,
+          "ac": 96,
+          "cursor": "pointer"
+        },
+        {
+          "tab": "inventory",
+          "ms": 147.79999999701977,
+          "ac": 96,
+          "cursor": "pointer"
+        },
+        {
+          "tab": "overview",
+          "ms": 155.79999999701977,
+          "ac": 96,
+          "cursor": "pointer"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+.rest134-exception{margin:12px 0;min-height:40px;align-items:center}
+.rest134-settings{display:grid;gap:12px;margin:16px 0}
+.rest134-settings .check-line{min-height:44px}
+.summon-attack>.cost134-heading,.cost134-heading{display:flex;align-items:center;justify-content:flex-start;gap:6px 10px;flex-wrap:wrap;min-width:0}
+.cost134-heading>strong{overflow-wrap:anywhere;min-width:0}
+.cost134-tags{display:inline-flex;align-items:flex-start;gap:5px;flex-wrap:wrap;min-width:0;max-width:100%}
+.cost134-tag{display:inline-flex;align-items:center;padding:2px 7px;border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--gold) 12%,var(--paper));color:var(--ink);font-size:11px;font-weight:600;line-height:1.6;white-space:nowrap;max-width:100%}
+.cost134-long{display:block;min-width:0}
+.cost134-long>summary{cursor:pointer;list-style:none;min-width:0}
+.cost134-long>summary::-webkit-details-marker{display:none}
+.cost134-long>summary>span{display:block;max-width:18ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cost134-long .cost134-full{display:block;white-space:normal;overflow-wrap:anywhere;max-width:28ch;padding:6px 0 2px}
+.cost134-long>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.summon-actions134{margin-top:14px;min-width:0}
+.summon-actions134>h4{margin:0 0 8px;font-size:13px;color:var(--muted)}
+.summon-action134{border:1px solid var(--line);border-radius:9px;padding:11px 12px;margin:8px 0;background:var(--paper);min-width:0}
+.summon-action134>p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.75;font-size:13px;display:block;-webkit-line-clamp:unset;margin:8px 0 0}
+.summon-actions134.is-compact .summon-action134>p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.summon-action-editor134{border:1px solid var(--line);border-radius:10px;background:var(--paper);margin:10px 0;min-width:0}
+.summon-action-editor134>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:8px 12px;cursor:pointer;overflow-wrap:anywhere}
+.summon-action-editor134>summary>strong{min-width:0}
+.summon-action-editor134>.form-grid{padding:4px 12px 12px}
+.summon-actions-editor134{margin:16px 0}

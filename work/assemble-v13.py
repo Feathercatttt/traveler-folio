@@ -1,0 +1,43 @@
+from pathlib import Path
+import re
+from patch_touch_v131 import apply_touch_fix
+root=Path(__file__).resolve().parent.parent;w=root/'work';out=root/'outputs';snap=w/'prototype-v012.html'
+if not snap.exists():snap.write_bytes((out/'旅人手札.html').read_bytes())
+dice=(out/'owlbear/src/obr-roll-core.mjs').read_text(encoding='utf8')
+(w/'folio-dice14.js').write_text('const FolioDice14=(()=>{\n'+dice.replace('export function ','function ')+'\nreturn {rollText,normalizeNotation};})();',encoding='utf8')
+html=snap.read_text(encoding='utf-8-sig');m=re.search(r'<script>\s*(.*?)</script>',html,re.S);assert m;js=m.group(1)
+# Preserve the tested desktop functions; mobile reuses their floating document initialization.
+start=js.index(' floatingWindow6=win;floatingMode6=mode;');end=js.index('\nfunction collapseFloating6',start);init=js[start:end].rstrip();assert init.endswith('}');init=init[:-1]
+for name in ['exportData','openFloating6','collapseFloating6']:js=re.sub(r'\bfunction '+name+r'\(', 'function '+name+'V12(',js)
+# Only the final export declaration exists twice historically. The earlier declaration remains shadowed.
+boot="render();if(loadProblem){warn(loadProblem);$('saveStatus').innerHTML=icon('info')+'请导出备份';}else save();";assert boot in js;js=js.replace(boot,'');notice="if(state.migrationNotice9){toast(state.migrationNotice9);delete state.migrationNotice9;save();}";js=js.replace(notice,'')
+js=apply_touch_fix(js)
+js=js.replace("if(input.dataset.link10Bonus)continue;","if(input.id==='monsterSearch19'||input.dataset.link10Bonus)continue;")
+js=js.replace(".map(cardById).filter(Boolean).slice(0,200);",".map(cardById).filter(Boolean).slice(0,1200);")
+usage_gate="if(['trait','item'].includes(type))body.insertAdjacentHTML('beforeend',selectField('次数 / 数值成长的职业来源'"
+assert js.count(usage_gate)==1
+js=js.replace(usage_gate,usage_gate.replace("['trait','item']","['trait','item','spell']"))
+for name in ['foldDescriptions10','renderSheet']:js=re.sub(r'\bfunction '+name+r'\(', 'function '+name+'V132(',js)
+for name in ['formulaRow6','formulaPreview6','decorateSummary10']:js=re.sub(r'\bfunction '+name+r'\(', 'function '+name+'V131(',js)
+for name in ['usageClean','useEntries','usageWidget','renderCounters','summonFullProfile5','normalizeV3Character','usageForm','usageRead','editCounter','milestoneToolbar','runMilestone','summonProfile5','summonAttacks5','summonAttackRow5','summonReadProfile5','summonEditor5','descriptor10']:js=re.sub(r'\bfunction '+name+r'\(', 'function '+name+'V133(',js)
+for name in ['attachedCard','renderLibrary','editCard','decorateOwl11','owlClick11','requestOwl11','handleOwlCommand11','transferDialog13']:
+ if name!='transferDialog13':js=re.sub(r'\bfunction '+name+r'\(', 'function '+name+'V134(',js)
+# Single scheduled enhancement pass, no whole-document observer fan-out.
+js=js.replace('new MutationObserver(()=>decorateOwl11(document)).observe(document.body,{childList:true,subtree:true});','')
+js=js.replace('new MutationObserver(()=>compactNumbers12(document)).observe(document.body,{childList:true,subtree:true});','')
+js=js.replace('new doc.defaultView.MutationObserver(()=>enhanceUniversal10(doc))','new doc.defaultView.MutationObserver(()=>scheduleDOM16(doc))')
+js=js.replace("if(k==='dataLinks10'){t[k]=value;return true;}","if(typeof invalidateDerived16==='function')invalidateDerived16();if(k==='dataLinks10'){t[k]=value;return true;}")
+for name in ['activeEffects','abilityStat','modStat','saveStat','skillStat','attackStat','pbStat','hpLimit','calculated','renderQuick','renderPrint','openLibrary','renderIdentity','renderTabs','owlView11','syncUniversal10','save','refreshDerived','connectOwl11']:js=re.sub(r'\bfunction '+name+r'\(', 'function '+name+'V14(',js)
+js+='\n'+(w/'fflate-0.8.2.js').read_text(encoding='utf8')+'\n'+(w/'v13-transfer.js').read_text(encoding='utf-8-sig').replace('function transferDialog13(', 'function transferDialog13V134(').replace('function previewTransfer13(', 'function previewTransfer13V14(').replace('function applyTransfer13(', 'function applyTransfer13V14(')+'\nfunction initializeFloating13(win,mode){\n'+init+'\n}\n'+(w/'v13-mobile.js').read_text(encoding='utf-8-sig')+'\n'+(w/'v13-formulas.js').read_text(encoding='utf-8-sig')+'\n'+(w/'v13-card-details.js').read_text(encoding='utf-8-sig').replace('function renderSheet(', 'function renderSheetV14(')+'\n'+(w/'v134-rest.js').read_text(encoding='utf-8-sig').replace('function useEntries(', 'function useEntriesV14(')+'\n'+(w/'v134-summon-actions.js').read_text(encoding='utf-8-sig')+'\n'+(w/'folio-dice14.js').read_text(encoding='utf8')+'\n'+(w/'qrcodegen-1.8.0.js').read_text(encoding='utf8')+'\n'+(w/'v14-cards-rolls.js').read_text(encoding='utf8').replace('function renderLibrary(', 'function renderLibraryV14(').replace('function decorateOwl11(', 'function decorateOwl11V14(').replace('function handleOwlCommand11(', 'function handleOwlCommand11V16Previous(')+'\n'+(w/'v14-transfer.js').read_text(encoding='utf8').replace('function transferDialog13(', 'function transferDialog13V14(').replace('function currentCode14(', 'function currentCode14V14(').replace('function pollTransfer14(', 'function pollTransfer14V14(').replace("x.version!=='0.14'","x.version!=='0.19'")+'\n'+(w/'v16-performance.js').read_text(encoding='utf-8-sig')+'\n'+(w/'v16-transfer.js').read_text(encoding='utf-8-sig')+'\n'+(w/'v16-owl.js').read_text(encoding='utf-8-sig')+'\n'
+for name in ['summonHpWidget5','summonInstance5','normalizeV3Character','summonOptionEffects10','owlActor11','editStatus','floatingSkillView6','refreshFloating6','handleOwlCommand11','transferDialog13','currentCode14','renderSheet','save','publishOwl11','adoptOwl11']:
+ js=re.sub(r'\bfunction '+name+r'\(', 'function '+name+'V16(',js)
+js=js.replace("if(!$('transferInput13'))transferDialog13();","if(!$('transferInput13'))openTransferDelivery17('all');")
+js+='\n'+(w/'v17-health.js').read_text(encoding='utf-8-sig')+'\n'+(w/'v17-bonus.js').read_text(encoding='utf-8-sig')+'\n'+(w/'v17-transfer.js').read_text(encoding='utf-8-sig')+'\n'+(w/'v17-search.js').read_text(encoding='utf-8-sig')+'\n'+(w/'v17-persistence.js').read_text(encoding='utf-8-sig')
+
+for name in ['ownerForInput10','numericLink8','cleanEffects','effectValue','normalizeV3Character','summonInstance5','effectRow','readEffectRows','optionFxRow10','readOptions10','subEffectRow','featuresRead','effectBadges','editStatus','activeEffects','setActorBonus17','owlActor11','handleOwlCommand11','requestOwl11','owlClick11','renderSheet','floatingSkillView6']:
+ js=re.sub(r'\bfunction '+name+r'\(', 'function '+name+'V17(',js)
+once=(out/'owlbear/src/obr-once-core.mjs').read_text(encoding='utf8').replace('export function ','function ')
+for name in ['validateState','owlView11']:
+ js=re.sub(r'\bfunction '+name+r'\(', 'function '+name+'V18(',js)
+js+='\nconst FolioOnce18=(()=>{'+once+';return {rollContext18,diceTarget18,diceMatches18,selectOnce18,appendOnce18};})();\n'+(w/'v18-effects.js').read_text(encoding='utf8')+'\n'+(w/'v18-rolls.js').read_text(encoding='utf8')+'\n'+(w/'v19-bestiary.js').read_text(encoding='utf8')+'\n'+boot+'\n'+notice
+(w/'v13-app.js').write_text(js,encoding='utf8');html=html[:m.start(1)]+js+html[m.end(1):];html=re.sub(r'(<style id="linkStyles8">)(.*?)(</style>)',lambda x:x.group(1)+x.group(2)+(w/'v13-touch.css').read_text(encoding='utf-8-sig')+(w/'v134.css').read_text(encoding='utf-8-sig')+(w/'v14.css').read_text(encoding='utf8')+(w/'v16.css').read_text(encoding='utf-8-sig')+(w/'v17.css').read_text(encoding='utf-8-sig')+(w/'v18.css').read_text(encoding='utf8')+(w/'v19-bestiary.css').read_text(encoding='utf8')+x.group(3),html,count=1,flags=re.S);html=html.replace('</head>','<style id="mobileStyles13">'+(w/'v13.css').read_text(encoding='utf-8-sig')+'</style><style id="formulaStyles132">'+(w/'v13-formulas.css').read_text(encoding='utf-8-sig')+'</style><style id="cardDetailsStyles133">'+(w/'v13-card-details.css').read_text(encoding='utf-8-sig')+'</style><style id="restActionsStyles134">'+(w/'v134.css').read_text(encoding='utf-8-sig')+'</style></head>',1).replace('v0.12','v0.19.0');(out/'旅人手札.html').write_text(html,encoding='utf8');print('Built v0.19.0',len(html.encode('utf8')))

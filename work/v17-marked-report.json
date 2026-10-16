@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "checks": [
+    "Marked原生PATH/TEXT格式：名称、原图标矢量及可见底色齐全，避开DM手动状态占位",
+    "数值无变化时不重复写图元，避免同步循环",
+    "状态改名或换底色原位更新，不堆叠重复标签",
+    "棋子移动和隐藏后，图标文字底板跟随且同步可见性",
+    "删除残缺图标后会修复完整标签，不影响其他状态",
+    "取消状态、收回召唤物或解绑时清理自己的标签，保留手动Marked和其他插件数据"
+  ],
+  "contract": {
+    "version": "1.81",
+    "source": "https://marked.battle-system.com/assets/style-Dql21iiH.js",
+    "namespace": "com.battle-system.mark"
+  },
+  "limitation": "Owlbear host mocked; real authenticated room not exercised"
+}

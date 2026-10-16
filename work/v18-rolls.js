@@ -1,0 +1,36 @@
+function activeEffects(c=current()){return memoDerived16('effects18','',c,()=>activeEffectsV17(c).map(fx=>{const parent=fx.__path10?target10(rawState10(),fx.__path10.slice(0,-1))?.value:null;return typeof parent?.marked18==='boolean'?{...fx,marked18:parent.marked18}:fx;}));}
+function setActorBonus17(x){
+ const c=state.characters.find(c=>c.id===x.characterId);if(!c)return;const s=x.summonId&&x.summonId!=='main'?c.summons.find(s=>s.id===x.summonId):null;
+ if(!hasDice18(x.expression)){setActorBonus17V17(x);const q=s?.quickTemp17||c.quickTemp;q.marked18=x.marked18!==false;save();return;}
+ if(x.summonId&&x.summonId!=='main'&&!s)return;if(!bonusTargetRows17(c,s).some(([k])=>k===x.target)||!FolioOnce18.diceTarget18(x.target))throw Error('请选择攻击、技能、豁免、先攻或伤害检定作为骰子加成的影响项目');
+ const expression=String(x.expression).trim();FolioDice14.rollText(resolveText10(expression,{__actor10:c,__number10:true},c),()=>1);
+ const path=['characters','id:'+c.id,...(s?['summons','id:'+s.id,'quickTemp17']:['quickTemp'])],raw=rawOf10(s||c),field=s?'quickTemp17':'quickTemp';clearBindings10(path);raw[field]={target:x.target,value:0,reason:str4(x.reason,400),marked18:x.marked18!==false};
+ const p=[...path,'value'];rawState10().dataLinks10[pathKey10(p)]={path:p,mode:'number',expression,template:expression,label:'下一次检定加成',gain:1,min:null,max:null,integer:false};rearmDice18(c,s?.id||'main');
+}
+function fxLines18(rows,c,s=null){return rows.flatMap(fx=>{if(fx.marked18===false)return [];const dice=effectExpression18(fx,c);if(dice){const id=s?.id||'main',key=id+'|'+dice.key,token=(c.diceEpoch18?.[key]||'0')+'|'+dice.raw;if(c.spentDice18?.[key]===token)return [];}return [effectText18(fx,c)+(fx.reason?' · '+fx.reason:'')];});}
+function owlActor11(c,s=null){
+ const actor=owlActor11V17(c,s);actor.pendingDice18=diceEntries18(c,s);actor.initiative19=s?Math.floor((s.profile.abilities.dex-10)/2):calculated('initiative',c).value;actor.quickBonus17.marked18=(s?.quickTemp17||c.quickTemp).marked18!==false;
+ const marks=[];
+ if(!s){for(const status of c.statuses.filter(x=>x.active&&x.marked18!==false)){const rows=status.effects.filter(x=>x.marked18!==false),lines=fxLines18(rows,c);if(status.effects.length&&!lines.length)continue;marks.push({...mapStatus17(status.id,status.name,status.icon,status.color),lines18:lines.length?lines:['仅状态标记，无固定数值修正']});}}
+ const fx=s?summonOptionEffects10(c,rawOf10(s)):activeEffects(c),groups=new Map();
+ for(const row of fx){const path=row.__path10||[],isOption=path.includes('options10'),isQuick=row.id==='quick-temp'||row.id==='summon-quick17';if(!s&&row.sourceType==='状态')continue;if(row.marked18===false||!s&&!isOption&&!isQuick&&row.marked18!==true)continue;if(isQuick&&(s?.quickTemp17||c.quickTemp).marked18===false)continue;
+  const parent=path.slice(0,path.indexOf('effects')),key=isQuick?'quick17':pathKey10(parent.length?parent:path.slice(0,-1)),card=path[0]==='cards'?cardById(path[1]?.slice(3)):null;if(!groups.has(key))groups.set(key,{name:isQuick?(s?.quickTemp17||c.quickTemp).reason||'临时加成':row.source||card?.name||'特性影响',icon:card?.icon||'spark',rows:[]});groups.get(key).rows.push(row);
+ }
+ for(const [key,g] of groups){const lines=fxLines18(g.rows,c,s);if(lines.length)marks.push({...mapStatus17('effect18:'+key,g.name,g.icon),lines18:lines});}
+ if(!s&&c.concentration)marks.push({...mapStatus17('concentration17','专注 · '+c.concentration.name,'eye','#365e53'),lines18:['保持专注：'+c.concentration.name]});actor.mapStatuses17=marks;return actor;
+}
+function handleOwlCommand11(x){if(x.type==='milestone19'){const c=state.characters.find(c=>c.id===x.characterId);if(c)milestoneTools19(c,x.node);return;}if(x.type==='consume-dice18'){const c=state.characters.find(c=>c.id===x.characterId);if(c)consumeDice18(c,x.actorId||'main',x.rows);return;}if(x.type==='rearm-dice18'){const c=state.characters.find(c=>c.id===x.characterId);if(c)rearmDice18(c,x.actorId||'main');return;}return handleOwlCommand11V17(x);}
+function rollActor18(actorName,doc,hint={}){const c=current(),s=hint.actorId&&hint.actorId!=='main'?c.summons.find(s=>s.id===hint.actorId):hint.actorId==='main'?null:doc!==document?floatSummon10():c.summons.find(s=>s.profile.name===actorName);return {c,s,actorId:s?.id||'main'};}
+async function requestOwl11(type,notation='',label='公式',actorName=current().name,doc=document,hint=null){
+ if(type!=='roll')return requestOwl11V17(type,notation,label,actorName,doc);hint=hint||doc._rollHint18||{};const {c,s,actorId}=rollActor18(actorName,doc,hint),context=FolioOnce18.rollContext18(label,hint),rows=FolioOnce18.selectOnce18({pendingDice18:diceEntries18(c,s)},context);
+
+ try{FolioDice14.rollText(notation,()=>1);if(OBR11.enabled){let live;try{live=await obrApi11('/api/view?since='+OBR11.revision);}catch{}const room=OBR11.prefs.roomId?live?.rooms?.find(x=>x.roomId===OBR11.prefs.roomId):live?.rooms?.at(-1);if(room){await publishOwl11();await obrApi11('/api/request',{id:crypto.randomUUID(),type,notation,label,actorName,characterId:c.id,actorId,rollKind19:context.kind,once18:rows,...OBR11.prefs,roomId:room.roomId});toast('已填入枭熊完整公式；确认掷骰后使用待用影响');return {route:'owlbear'};}}
+ const result=localResult14(FolioOnce18.appendOnce18(notation,rows),label,actorName,false,doc);consumeDice18(c,actorId,rows);return {route:'local',result};}catch(err){toast(err.message);return {route:'error'};}
+}
+function owlClick11(ev){const el=ev.target.closest('.owl-roll11');if(!el)return owlClick11V17(ev);const doc=el.ownerDocument,host=el.closest('[data-summon-instance]'),weapon=el.closest('.weapon-formula')?.querySelector('[data-action="weapon-info"]')?.dataset.id;doc._rollHint18={checkKey:el.dataset.check14,actorId:host?.dataset.summonInstance||(doc!==document?floatSummon10()?.id:'main'),weaponId:weapon};try{return owlClick11V17(ev);}finally{doc._rollHint18=null;}}
+function pendingPanel18(c=current(),s=null){const rows=diceEntries18(c,s,true);if(!rows.length)return '';return '<details class="pending18" open><summary>下一次检定影响 · '+rows.filter(x=>!x.spent).length+' 项待用</summary>'+rows.map(x=>'<p class="'+(x.spent?'spent18':'')+'"><strong>'+e(x.label)+'</strong><span>'+e(targetName(x.target))+' '+e(x.expression)+' · '+(x.spent?'已使用':'待用')+'</span></p>').join('')+'<button type="button" class="mini-link" data-rearm18="'+e(s?.id||'main')+'">重新设为待用</button></details>';}
+function renderSheet(){renderSheetV17();$('sheetContent').insertAdjacentHTML('afterbegin',pendingPanel18());}
+function floatingSkillView6(){return floatingSkillView6V17()+pendingPanel18(current(),floatSummon10());}
+document.addEventListener('click',ev=>{const b=ev.target.closest('[data-rearm18]');if(b)rearmDice18(current(),b.dataset.rearm18);});
+
+function milestoneTools19(c,node){const key=node;for(const entry of useEntries(c))if(nodeMatches(entry.usage.recovery,key))c.cardUses[entry.key]=0;for(const counter of c.counters)if(nodeMatches(counter.recovery,key)){const max=counterLimit(counter,c);counter.current=Math.max(counter.min,Math.min(max===null?999999:max,counter.resetMode==='zero'?0:counter.resetMode==='value'?counter.resetValue:max===null?counter.current:max));}for(const pool of slotPools(c))if(nodeMatches(pool.recovery,key)){if(pool.profile)pool.profile.pactSpent=0;else pool.spent.fill(0);}save();render();}

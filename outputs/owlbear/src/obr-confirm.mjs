@@ -1,15 +1,16 @@
 import {advantageControls21} from './obr-advantage21.mjs';
 import {bridgeAPI21 as api,asset21,connectLocal21,backgroundOwner21} from './obr-host21.mjs';
-import {openWindow21,installWindow21} from './obr-window21.mjs';
+import {openWindow21,closeWindow21,installWindow21} from './obr-window21.mjs';
 import {subscribeToSfx,primeAudio19} from './obr-sound19.mjs';
 import OBR from '@owlbear-rodeo/sdk';
 import {rollText,normalizeNotation} from './obr-roll-core.mjs';
 const id=new URLSearchParams(location.search).get('id'),$=x=>document.getElementById(x);let token='',draft=null,done=false,ready=false;
 function expression(){const base=$('notation').value.trim(),extra=$('bonus').value.trim();return extra&&extra!=='0'?'('+base+')+('+extra+')':base;}
 function preview(){const value=expression();try{$('preview').textContent=value?'实际公式：'+normalizeNotation(value):'请输入公式';}catch(err){$('preview').textContent=err.message;}$('submit').textContent=$('report').checked?'确认发送数值':'确认掷骰';return value;}
-async function close(){if(ready)try{await OBR.popover.close('local.adventurer-folio/review/'+id);}catch{}}
+const reviewChannel23=new BroadcastChannel('folio-review23');
+async function close(){await closeWindow21(new URLSearchParams(location.search).get('_win21')||'local.adventurer-folio/review/'+id);}
 $('form').addEventListener('input',preview);$('report').addEventListener('change',preview);
-$('form').addEventListener('submit',async ev=>{ev.preventDefault();primeAudio19();if(done)return;const notation=preview();try{
+$('form').addEventListener('submit',async ev=>{ev.preventDefault();primeAudio19();if(done||!draft)return;const notation=preview();try{
  if(!notation||notation.length>1000)throw Error('请填写有效公式');
  rollText(notation,()=>1);
  done=true;$('submit').disabled=true;
@@ -17,9 +18,10 @@ $('form').addEventListener('submit',async ev=>{ev.preventDefault();primeAudio19(
  $('message').textContent='已确认，正在枭熊处理本次公式。';await close();
  }catch(err){done=false;$('submit').disabled=false;$('message').textContent=err.message;}
 });
-$('cancel').addEventListener('click',async()=>{if(done)return;done=true;try{await api('/api/cancel',{id});$('message').textContent='已取消，未掷骰。';$('submit').disabled=true;await close();}catch(err){done=false;$('message').textContent=err.message;}});
+$('cancel').addEventListener('click',()=>{done=true;$('submit').disabled=true;reviewChannel23.postMessage({cancel:id});void api('/api/cancel',{id}).catch(()=>{});void close();});
 OBR.onReady(()=>{ready=true;subscribeToSfx();});
-(async()=>{try{draft=await api('/api/draft?id='+encodeURIComponent(id));$('title').textContent=(draft.actorName||'角色')+' · '+(draft.label||'掷骰');$('notation').value=draft.notation||'';$('notation').dispatchEvent(new Event('input',{bubbles:true}));renderOnce18();renderTargets19();$('engine').value=draft.engine||'auto';$('audience').value=draft.audience||'self';$('report').checked=draft.type==='report';if(draft.confirmed||draft.status==='done'){done=true;$('submit').disabled=true;$('message').textContent='此草稿已处理，不会重复掷骰。';}preview();}catch(err){$('message').textContent=err.message;$('submit').disabled=true;}})();
+async function loadDraft23(){try{$('submit').disabled=true;$('message').textContent='正在读取待确认公式…';draft=await api('/api/draft?id='+encodeURIComponent(id));$('once18').replaceChildren();$('targetRows19').replaceChildren();$('message').textContent='';$('submit').disabled=false;$('title').textContent=(draft.actorName||'角色')+' · '+(draft.label||'掷骰');$('notation').value=draft.notation||'';$('notation').dispatchEvent(new Event('input',{bubbles:true}));renderOnce18();renderTargets19();$('engine').value=draft.engine||'auto';$('audience').value=draft.audience||'self';$('report').checked=draft.type==='report';if(draft.confirmed||draft.status==='done'){done=true;$('submit').disabled=true;$('message').textContent='此草稿已处理，不会重复掷骰。';}preview();}catch(err){$('message').textContent='待确认公式暂未读取：'+err.message;$('submit').disabled=true;if(!document.getElementById('retry23')){const retry=document.createElement('button');retry.id='retry23';retry.type='button';retry.textContent='重新读取';retry.onclick=()=>{retry.remove();void loadDraft23();};$('message').after(retry);}}}
+void loadDraft23();
 function renderOnce18(){const host=document.getElementById('once18');for(const row of draft.once18||[]){const label=document.createElement('label'),box=document.createElement('input');box.type='checkbox';box.checked=true;box.dataset.once18=row.key;label.append(box,document.createTextNode(row.label+' · '+row.expression));host.append(label);box.addEventListener('change',()=>{const previous=(draft.once18||[]).filter(r=>r.key!==row.key?document.querySelector('[data-once18="'+CSS.escape(r.key)+'"]').checked:!box.checked),old=previous.reduce((s,r)=>'('+s+')+('+r.expression+')',draft.baseNotation18);const selected=(draft.once18||[]).filter(r=>document.querySelector('[data-once18="'+CSS.escape(r.key)+'"]').checked),next=selected.reduce((s,r)=>'('+s+')+('+r.expression+')',draft.baseNotation18);if($('notation').value===old)$('notation').value=next;else if(!box.checked){const suffix='+('+row.expression+')';const at=$('notation').value.lastIndexOf(suffix);if(at>=0)$('notation').value=$('notation').value.slice(0,at)+$('notation').value.slice(at+suffix.length);}else $('notation').value='('+$('notation').value+')+('+row.expression+')';preview();});}if(draft.once18?.length){const note=document.createElement('p');note.className='muted';note.textContent='待用骰子已写入上方基础公式。取消勾选可保留该影响；确认且成功掷骰后才消耗。';host.append(note);}}
 
 function renderTargets19(){const rows=draft.targets19||[];$('targets19').hidden=!rows.length;for(const row of rows){const label=document.createElement('label'),box=document.createElement('input');box.type='checkbox';box.checked=true;box.dataset.target19=row.id;label.append(box,document.createTextNode(' '+row.name));$('targetRows19').append(label);}}

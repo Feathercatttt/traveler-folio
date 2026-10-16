@@ -15,6 +15,11 @@ export function stageCommand21(raw,x,sender){const s=structuredClone(stageState2
   else if(x.type==='stage-edit'){if(!gm&&c.ownerId!==sender.id)throw Error('只有 DM 或创建者可以修改立绘资料');if(x.name!==undefined)c.name=String(x.name||'演出角色').slice(0,60);if(x.expressions){c.expressions=x.expressions.slice(0,12).map(r=>({name:String(r.name||'默认').slice(0,40),url:safeMedia19(r.url)})).filter(r=>r.url&&r.url.length<=2048);c.expression=Math.min(c.expression,c.expressions.length-1);if(!c.expressions.length)c.visible=false;}}
   else if(x.type==='stage-enter'){if(!s.live||!c.enabled)throw Error('等待 DM 勾选角色并开启直播');if(!c.expressions.length)throw Error('先为角色设置立绘');if(!c.visible&&s.roster21.filter(r=>r.visible).length>=8)throw Error('舞台最多同时显示 8 位角色');c.visible=true;}
   else if(x.type==='stage-leave')c.visible=false;
+  else if(x.type==='stage-position'){
+   if(!s.live||!c.enabled||!c.visible)throw Error('只能移动直播中正在显示的立绘');
+   if(!Number.isFinite(x.position?.x)||!Number.isFinite(x.position?.y))throw Error('立绘位置无效');
+   c.position23={x:Math.max(.04,Math.min(.96,x.position.x)),y:Math.max(.12,Math.min(1,x.position.y))};
+  }
   else if(x.type==='stage-expression'){if(Number.isInteger(x.index)&&x.index>=0&&x.index<c.expressions.length)c.expression=x.index;if(x.effect!==undefined)c.effect=choose(effects21,x.effect);}
   else if(x.type==='stage-move'){requireGM();const at=s.roster21.indexOf(c),to=Math.max(0,Math.min(s.roster21.length-1,at+(x.direction===-1?-1:1)));s.roster21.splice(at,1);s.roster21.splice(to,0,c);}
   else throw Error('未知演出操作');

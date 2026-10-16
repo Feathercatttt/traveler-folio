@@ -2,7 +2,7 @@
 
 可离线使用的中文 DND 角色卡工坊，以及 Owlbear Rodeo 角色卡联动与跑团工具。
 
-当前版本 **0.22.0**，角色数据格式 **10**。
+当前版本 **0.23.0**，角色数据格式 **10**。
 
 [下载最新版](https://github.com/Feathercatttt/traveler-folio/releases/latest) · [功能表与使用方法](docs/功能表与使用方法.md)
 
@@ -29,14 +29,15 @@ Windows公开Release不附带约214MiB的WebView2离线安装器；缺少内核�
 
 ## 枭熊安装
 
-[线上安装说明与复制地址](https://feathercatttt.github.io/traveler-folio/) · [v0.22操作指南](docs/v0.22安装与使用方法.md)
+[线上插件地址](https://feathercatttt.github.io/traveler-folio/) · [v0.23操作指南](docs/v0.23安装与使用方法.md)
 
 | 独立按钮 | DM 添加的安装地址 |
 | --- | --- |
-| 角色速查 | https://feathercatttt.github.io/traveler-folio/manifest.json |
+| 角色速查（本地推荐，先开EXE） | http://localhost:17632/manifest.json |
+| 角色速查（线上备用） | https://feathercatttt.github.io/traveler-folio/manifest.json |
 | 跑团工具 | https://feathercatttt.github.io/traveler-folio/tools-manifest.json |
 
-停用旧 localhost 扩展并刷新房间。DM 换电脑仍使用相同地址。骰子、先攻、演出与场景工具独立运行；读取本地角色或怪物库时打开 EXE v0.22，在小卡点击“连接本机角色卡”，受浏览器限制时使用“连接窗口”。角色资料不会存到 GitHub Pages。
+每位玩家先打开自己的 EXE，再进入房间。小卡恢复枭熊原生窗口并自动连接；不再需要额外连接弹窗。线上小卡若被浏览器限制本机访问，请 DM 换用本地角色速查。停用同类旧扩展后刷新房间，避免重复后台。角色资料不会存到 GitHub Pages。
 
 ## 功能表
 

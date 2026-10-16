@@ -1,6 +1,6 @@
 {
   "name": "旅人手札 · 角色速查",
-  "version": "0.22.0",
+  "version": "0.23.0",
   "manifest_version": 1,
   "author": "旅人手札",
   "description": "本地角色卡与 Stat Bubbles / Marked 联动，检定确认与收藏速查。",
@@ -8,9 +8,9 @@
   "action": {
     "title": "旅人手札",
     "icon": "/icon.svg",
-    "popover": "/launcher21.html?kind=card",
-    "width": 240,
-    "height": 72
+    "popover": "/panel.html",
+    "width": 440,
+    "height": 720
   },
   "background_url": "/background.html"
 }

@@ -9,4 +9,12 @@
 @keyframes enter{from{transform:translateY(36px);opacity:0}to{transform:none;opacity:1}}@keyframes glitch{0%,93%,100%{transform:none}94%{transform:translateX(3px);filter:drop-shadow(-5px 0 #64c4c8)}96%{transform:translateX(-3px);filter:drop-shadow(5px 0 #b95b76)}}@keyframes rain{to{transform:translate(20px,45px)}}
 @media(max-width:650px){.stage{padding:0 1vw;gap:0}.standing{height:74vh;flex-basis:calc(98vw / var(--cast-count,1))}.standing img{max-width:100%;max-height:74vh}.standing span{bottom:1vh;font-size:11px;padding:4px 10px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.standing{position:absolute;flex:none;bottom:0;left:50%;transform:translateX(-50%);animation:enter23 360ms cubic-bezier(.18,.72,.2,1) both;user-select:none;touch-action:none}
+.standing img{max-width:100%;pointer-events:none}.standing span{pointer-events:none}
+body.stage-moving23{pointer-events:auto}body.stage-moving23 .standing.can-move23{pointer-events:auto;cursor:grab}body.stage-moving23 .standing.dragging23{cursor:grabbing;animation:none;z-index:10}
+.stage-move-toolbar23{display:none;position:fixed;top:14px;left:50%;transform:translateX(-50%);gap:12px;align-items:center;padding:8px 10px;border-radius:10px;background:rgba(20,23,28,.82);border:1px solid #ffffff40;color:#fff1d9;font-size:12px;pointer-events:auto;z-index:50}
+.stage-moving23 .stage-move-toolbar23{display:flex}.stage-move-toolbar23 button{font:700 12px 'Microsoft YaHei',sans-serif;color:#302217;border:1px solid #e1bc78;background:#f0d19c;padding:8px 10px;border-radius:6px;cursor:pointer;white-space:nowrap}
+@keyframes enter23{from{transform:translate(-50%,36px);opacity:0}to{transform:translateX(-50%);opacity:1}}
+@media(max-width:650px){.stage-move-toolbar23 span{display:none}.standing{flex:none}}@media(prefers-reduced-motion:reduce){.standing{animation:none}}
 </style></head><body><div id="status"></div><div id="stage" class="stage"></div><script src="surface19.js"></script></body></html>

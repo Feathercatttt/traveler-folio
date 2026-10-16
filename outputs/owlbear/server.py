@@ -149,9 +149,11 @@ def main():
     elif p in ('/api/review-open','/api/confirm','/api/cancel'):
      job=next((j for j in jobs if j['id']==payload.get('id')),None)
      if not job:self.send(404,{'error':'草稿已失效'});return
+     if p=='/api/cancel' and job['status']=='done' and not job.get('confirmed'):
+      self.send(200,{'ok':True,'duplicate':True});return
      if p=='/api/review-open':
       if job.get('worker')!=payload.get('worker'):self.send(403,{'error':'Worker mismatch'});return
-      if not job.get('confirmed'):job['status']='review'
+      if not job.get('confirmed') and job['status'] in ('running','review'):job['status']='review'
       self.send(200,{'ok':True});return
      if job['status'] not in ('running','review') or job.get('confirmed'):self.send(409,{'error':'此草稿已处理，不会重复掷骰。'});return
      if p=='/api/cancel':

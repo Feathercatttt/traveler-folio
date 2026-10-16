@@ -3,7 +3,7 @@ import {asset21} from './obr-host21.mjs';
 
 const key=id=>`folio-window21/${id}`;
 const activeKey=id=>`${key(id)}/active-popover`;
-const activeId=id=>localStorage.getItem(activeKey(id))||id;
+const activeId=id=>{const p=new URLSearchParams(location.search);return localStorage.getItem(activeKey(id))||(p.get('_win21')===id&&p.get('_popover21'))||id;};
 
 function geometryPopover21(id,url,geo,hidePaper=true){
  return {id,url,width:geo.w,height:geo.h,anchorReference:'POSITION',anchorPosition:{left:geo.x,top:geo.y},anchorOrigin:{horizontal:'LEFT',vertical:'TOP'},transformOrigin:{horizontal:'LEFT',vertical:'TOP'},disableClickAway:true,hidePaper};
@@ -12,8 +12,8 @@ function geometryPopover21(id,url,geo,hidePaper=true){
 export async function openWindow21(id,path,options={}){
  const [vw,vh]=await Promise.all([OBR.viewport.getWidth(),OBR.viewport.getHeight()]);
  let saved={};try{saved=JSON.parse(localStorage.getItem(key(id))||'{}');}catch{}
- const w=Math.max(190,Math.min(vw-12,saved.w||options.width||470));
- const h=Math.max(96,Math.min(vh-12,saved.h||options.height||650));
+ const w=Math.max(190,Math.min(vw-12,(!options.resetSize&&saved.w)||options.width||470));
+ const h=Math.max(96,Math.min(vh-12,(!options.resetSize&&saved.h)||options.height||650));
  const x=Math.max(6,Math.min(vw-w-6,saved.x??options.x??Math.max(12,(vw-w)/2)));
  const y=Math.max(6,Math.min(vh-h-6,saved.y??options.y??64));
  const geo={x,y,w,h,vw,vh};localStorage.setItem(key(id),JSON.stringify(geo));

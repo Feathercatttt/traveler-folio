@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "routes": [
+    {
+      "route": "https://gh-proxy.org/",
+      "success": true,
+      "seconds": 5.17,
+      "version": "0.20.0",
+      "apkSha256": "9c30db203accd85f82a0bb8f0b92fd0b7f1dbf134d5c55983220380309fc5bdc"
+    },
+    {
+      "route": "https://ghfast.top/",
+      "success": true,
+      "seconds": 5.69,
+      "version": "0.20.0",
+      "apkSha256": "9c30db203accd85f82a0bb8f0b92fd0b7f1dbf134d5c55983220380309fc5bdc"
+    },
+    {
+      "route": "https://ghproxy.net/",
+      "success": true,
+      "seconds": 39.19,
+      "version": "0.20.0",
+      "apkSha256": "9c30db203accd85f82a0bb8f0b92fd0b7f1dbf134d5c55983220380309fc5bdc"
+    },
+    {
+      "route": "direct",
+      "success": true,
+      "seconds": 15.16,
+      "version": "0.20.0",
+      "apkSha256": "9c30db203accd85f82a0bb8f0b92fd0b7f1dbf134d5c55983220380309fc5bdc"
+    }
+  ]
+}

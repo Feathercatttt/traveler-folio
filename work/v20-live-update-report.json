@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "checks": [
+    "real signed manifest check via parallel fallback routes",
+    "real controller cancels partial download and permits retry",
+    "invalid preferred mirror falls back and downloads verified official Windows update ZIP",
+    "signed downloaded update restored after host restart",
+    "downloaded package still permits checking higher releases"
+  ],
+  "errors": []
+}

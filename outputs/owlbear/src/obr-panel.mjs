@@ -1,3 +1,5 @@
+import {bridgeAPI21 as api,asset21,connectLocal21,backgroundOwner21} from './obr-host21.mjs';
+import {openWindow21,installWindow21} from './obr-window21.mjs';
 import {setMiniActor19} from './obr-targets19.mjs';
 import OBRTools19,{subscribeToSfx,primeAudio19} from './obr-panel-tools19.mjs';
 import {rollContext18,selectOnce18} from './obr-once-core.mjs';
@@ -9,7 +11,6 @@ const $=id=>document.getElementById(id),escape=x=>String(x??'').replace(/[&<>"']
 const hpInputs14=new Map();
 const prefs={engine:localStorage.getItem('folio-ob-engine')||'auto',audience:localStorage.getItem('folio-ob-audience')||'self'};
 function notice(text){$('message').textContent=text;}
-async function api(path,body){if(!token){const r=await fetch('/api/session');token=(await r.json()).token;}const r=await fetch(path,{method:body?'POST':'GET',headers:{'X-Folio-Token':token,...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});const x=await r.json();if(!r.ok)throw Error(x.error||'连接中断');return x;}
 function actor(){return view?.actors.find(x=>x.id===actorId)||view?.actors[0];}
 function rollButton(notation,label,report=false){return '<button class="roll" data-roll="'+escape(notation)+'" data-label="'+escape(label)+'" '+(report?'data-report="1"':'')+' title="填入枭熊草稿，确认后掷骰">'+escape(notation)+'</button>';}
 function cardHTML(card){
@@ -67,3 +68,6 @@ refresh();setInterval(refresh,800);
 installPanelExtras17({getView:()=>view,getActor:actor,api,notice,render,getTab:()=>tab,cardHTML});
 
 OBRTools19();
+
+installWindow21('角色速查');
+const connect21=document.createElement('div');connect21.className='selectors';connect21.innerHTML='<button type=button id=localConnect21>连接本机角色卡</button><button type=button id=relayConnect21>连接窗口</button>';document.body.prepend(connect21);document.getElementById('localConnect21').onclick=async()=>{try{await connectLocal21();await refresh();notice('本机连接成功');}catch(e){notice(e.message+'；可使用右侧连接窗口');}};document.getElementById('relayConnect21').onclick=()=>connectLocal21(true).catch(e=>notice(e.message));

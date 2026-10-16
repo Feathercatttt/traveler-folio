@@ -92,7 +92,7 @@ function resume(): void {
 // Build-target-aware. Same logic as src/asset-base.ts but inlined here
 // to keep sfx.ts a true leaf module (no cross-module imports — see
 // the file header for why circular-dep risk made us split sfx).
-const SFX_BASE = `${location.origin}/suite19/`;
+const SFX_BASE = new URL('suite19/',new URL('.',location.href)).href;
 const DICE_URL = `${SFX_BASE}dice.mp3`;
 const CARTOON_URL = `${SFX_BASE}cartoon.mp3`;
 

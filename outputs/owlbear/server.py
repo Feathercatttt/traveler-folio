@@ -22,9 +22,9 @@ def main():
   except (OSError,ValueError):print('Previous bridge cache could not be read; keeping the file and using browser data.')
  once=OnceService18(db)
  paths={'/manifest.json':here/'manifest.json','/panel.html':here/'panel.html','/panel.js':here/'panel.js','/background.html':here/'background.html','/background.js':here/'background.js','/style.css':here/'style.css','/icon.svg':here/'icon.svg','/card.html':folder/'旅人手札.html','/':here/'install.html','/install.html':here/'install.html','/roll.html':here/'roll.html','/roll.js':here/'roll.js','/LICENSE-sdk.txt':here/'LICENSE-sdk.txt'}
- for name in ['status18.html','status18.js','tools19.html','tools19.css','tools19.js','surface19.html','surface19.js','tools19.svg','heart19.svg','target19.svg','dice-effect19.html','dice-effect19.js','LICENSE-suite19.txt','THIRD-PARTY19.txt']:paths['/'+name]=here/name
+ for name in ['tools-manifest.json','launcher21.html','launcher21.js','connect21.html','results21.html','results21.js','status18.html','status18.js','tools19.html','tools19.css','tools19.js','surface19.html','surface19.js','tools19.svg','heart19.svg','target19.svg','dice-effect19.html','dice-effect19.js','LICENSE-suite19.txt','THIRD-PARTY19.txt']:paths['/'+name]=here/name
  for name in ['d4.png','d6.png','d8.png','d10.png','d12.png','d20.png','d100.png','dice.mp3','cartoon.mp3']:paths['/suite19/'+name]=here/'suite19'/name
- allowed={'null','https://owlbear.app','https://www.owlbear.app','https://owlbear.rodeo','https://www.owlbear.rodeo',f'http://localhost:{args.port}',f'http://127.0.0.1:{args.port}'}
+ allowed={'null','https://feathercatttt.github.io','https://owlbear.app','https://www.owlbear.app','https://owlbear.rodeo','https://www.owlbear.rodeo',f'http://localhost:{args.port}',f'http://127.0.0.1:{args.port}'}
  def persist():
   temp=cache.with_suffix('.tmp');temp.write_text(json.dumps(db,ensure_ascii=False,separators=(',',':')),encoding='utf-8');temp.replace(cache)
  def live():return [v for v in backgrounds.values() if time.time()-v['time']<8]
@@ -51,13 +51,14 @@ def main():
    parsed=urllib.parse.urlparse(self.path);p=parsed.path;q=urllib.parse.parse_qs(parsed.query)
    if p=='/api/session':
     if not self.valid_origin():self.send(403,{'error':'Origin not allowed'});return
-    self.send(200,{'app':'adventurer-folio-owlbear','version':'0.20','token':token,'revision':db['revision']});return
+    self.send(200,{'app':'adventurer-folio-owlbear','version':'0.21','token':token,'revision':db['revision']});return
    if p.startswith('/api/'):
     if not self.auth():return
     with lock:
      if p=='/api/transfer/status':self.send(200,handoff.status())
      elif p=='/api/transfer/receive':self.send(200,handoff.receive())
      elif p=='/api/state':self.send(200,db)
+     elif p=='/api/bestiary21':self.send(200,{'monsters':(json.loads(db['raw']) if isinstance(db.get('raw'),str) else db.get('raw') or {}).get('bestiary19',[])})
      elif p=='/api/view':
       since=int(q.get('since',['-1'])[0]);self.send(200,{'revision':db['revision'],'view':db['view'] if since!=db['revision'] else None,'rooms':live(),'results':results[-40:],'mainOnline':time.time()-last_main[0]<8})
      elif p=='/api/inbox':
@@ -177,7 +178,7 @@ def main():
     else:self.send(404,{'error':'Unknown route'})
  server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
  print(f'Folio bridge: http://localhost:{args.port}/',flush=True)
- print(f'Install URL: http://localhost:{args.port}/manifest.json',flush=True)
+ print('Install URLs: https://feathercatttt.github.io/traveler-folio/manifest.json ; https://feathercatttt.github.io/traveler-folio/tools-manifest.json',flush=True)
  try:server.serve_forever()
  except KeyboardInterrupt:pass
  finally:handoff.stop();server.server_close()

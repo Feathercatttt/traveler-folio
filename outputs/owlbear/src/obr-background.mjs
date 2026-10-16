@@ -1,4 +1,6 @@
-import {installTargets19,targetsForDraft19} from './obr-targets19.mjs';
+import {bridgeAPI21 as api,asset21,connectLocal21,backgroundOwner21} from './obr-host21.mjs';
+import {openWindow21,installWindow21} from './obr-window21.mjs';
+import {installTargets19,targetsForDraft19,clearTargets21} from './obr-targets19.mjs';
 import {installTools19,updateToolsView19,initiativeResult19,diceEnabled19} from './obr-tools-background19.mjs';
 import {ownDiceRoll19} from './obr-dice19.mjs';
 import {installStatusHover18} from './obr-status-hover18.mjs';
@@ -6,8 +8,8 @@ import OBR from '@owlbear-rodeo/sdk';
 import {syncMarked17} from './obr-marked-sync.mjs';
 import {syncBoundTokens16,syncOtherCards19} from './obr-token-sync.mjs';
 import {rollText,normalizeNotation} from './obr-roll-core.mjs';
+const callbacks21=[];const onReady21=fn=>callbacks21.push(fn);
 const SOURCE='local.adventurer-folio',worker=crypto.randomUUID(),seen=new Set();let token='',ready=false,diceReady=false,lastCheck=0;
-async function api(path,body){if(!token){const r=await fetch('/api/session');token=(await r.json()).token;}const r=await fetch(path,{method:body?'POST':'GET',headers:{'X-Folio-Token':token,...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});const x=await r.json();if(!r.ok)throw Error(x.error||'桥接不可用');return x;}
 async function hasDice(){const id=crypto.randomUUID();return new Promise(resolve=>{let done=false;const end=value=>{if(done)return;done=true;off();clearTimeout(timer);resolve(value);},off=OBR.broadcast.onMessage('dice-plus/isReady',e=>{if(e.data?.requestId===id&&e.data.ready===true)end(true);}),timer=setTimeout(()=>end(false),1200);OBR.broadcast.sendMessage('dice-plus/isReady',{requestId:id,timestamp:Date.now()},{destination:'LOCAL'}).catch(()=>end(false));});}
 async function diceRoll(job){
  const playerId=await OBR.player.getId(),playerName=await OBR.player.getName();
@@ -23,7 +25,7 @@ async function execute(job){
  const key=job.id+':'+(job.confirmed?'final':'draft');if(seen.has(key))return;seen.add(key);let result;
  try{
   if(['roll','report'].includes(job.type)&&!job.confirmed){draftQueue19.push(job);void showDraft19();return;}
-  if(job.type==='open-panel'){await OBR.popover.open({id:SOURCE+'/sheet',url:'/panel.html',width:440,height:720,disableClickAway:true});result={ok:true,value:null,summary:'小卡已在枭熊展开',engine:'窗口'};}
+  if(job.type==='open-panel'){await openWindow21(SOURCE+'/sheet','panel.html',{width:440,height:720});result={ok:true,value:null,summary:'小卡已在枭熊展开',engine:'窗口'};}
   else if(job.type==='report'){await OBR.notification.show((job.actorName||'角色')+' · '+job.label+'：'+job.notation,'INFO');result={ok:true,value:null,summary:job.notation,engine:'数值'};}
   else{
    if(typeof job.notation!=='string'||job.notation.length>1000)throw Error('无效掷骰公式');
@@ -38,6 +40,7 @@ async function execute(job){
    }
   }
  }catch(err){result={ok:false,error:String(err.message||err),engine:'错误'};try{await OBR.notification.show(result.error,'ERROR');}catch{}}
+ if(result?.ok&&job.type==='roll'&&job.confirmed)await clearTargets21().catch(console.warn);
  try{await api('/api/result',{id:job.id,worker,...result});}catch{}
 }
 let polling=false;
@@ -48,16 +51,18 @@ async function tick(){
   const x=await api('/api/work?worker='+encodeURIComponent(worker)+'&room='+encodeURIComponent(OBR.room.id));for(const job of x.jobs)execute(job);
  }catch{token='';}finally{polling=false;}
 }
-OBR.onReady(()=>{ready=true;tick();});
+onReady21(()=>{ready=true;tick();});
 setInterval(tick,1000);
 let tokenRevision16=-1,tokenView16=null,tokenDirty16=true,tokenBusy16=false,tokenNotice16='';
 async function tokenTick16(){if(!ready||tokenBusy16)return;tokenBusy16=true;try{const x=await api('/api/view?since='+tokenRevision16);if(x.view){tokenView16=x.view;updateToolsView19(x.view);tokenRevision16=x.revision;tokenDirty16=true;}if(tokenDirty16&&tokenView16){tokenDirty16=false;await syncBoundTokens16(tokenView16);await syncOtherCards19(tokenView16);await syncMarked17(tokenView16);}tokenNotice16='';}catch(err){tokenDirty16=true;const text=err.message||String(err);if(text!==tokenNotice16&&tokenView16){tokenNotice16=text;try{await OBR.notification.show('棋子同步：'+text,'WARNING');}catch{}}}finally{tokenBusy16=false;}}
-OBR.onReady(()=>{OBR.scene.items.onChange(()=>{tokenDirty16=true;});tokenTick16();});setInterval(tokenTick16,1200);
+onReady21(()=>{OBR.scene.items.onChange(()=>{tokenDirty16=true;});tokenTick16();});setInterval(tokenTick16,1200);
 
-OBR.onReady(()=>{installTools19(api).catch(console.error);installStatusHover18().catch(console.error);installTargets19().catch(console.error);});
+onReady21(()=>{installTools19(api).catch(console.error);installStatusHover18().catch(console.error);installTargets19().catch(console.error);});
 
 const draftQueue19=[];let reviewing19=null,reviewPump19=false;
-async function showDraft19(){if(reviewPump19)return;reviewPump19=true;try{if(reviewing19){const state=await api('/api/draft?id='+encodeURIComponent(reviewing19.id));if(!state.confirmed&&state.status!=='done')return;await OBR.popover.close(SOURCE+'/review/'+reviewing19.id).catch(()=>{});reviewing19=null;}if(!reviewing19&&draftQueue19.length){reviewing19=draftQueue19.shift();await api('/api/review-targets19',{id:reviewing19.id,worker,targets19:await targetsForDraft19(reviewing19)});await OBR.popover.open({id:SOURCE+'/review/'+reviewing19.id,url:'/roll.html?id='+encodeURIComponent(reviewing19.id),width:420,height:600,disableClickAway:true});await api('/api/review-open',{id:reviewing19.id,worker});}}catch(err){console.warn(err);}finally{reviewPump19=false;}}
+async function showDraft19(){if(reviewPump19)return;reviewPump19=true;try{if(reviewing19){const state=await api('/api/draft?id='+encodeURIComponent(reviewing19.id));if(!state.confirmed&&state.status!=='done')return;await OBR.popover.close(SOURCE+'/review/'+reviewing19.id).catch(()=>{});reviewing19=null;}if(!reviewing19&&draftQueue19.length){reviewing19=draftQueue19.shift();await api('/api/review-targets19',{id:reviewing19.id,worker,targets19:await targetsForDraft19(reviewing19)});await openWindow21(SOURCE+'/review/'+reviewing19.id,'roll.html?id='+encodeURIComponent(reviewing19.id),{width:420,height:650});await api('/api/review-open',{id:reviewing19.id,worker});}}catch(err){console.warn(err);}finally{reviewPump19=false;}}
 setInterval(()=>{if(reviewing19||draftQueue19.length)showDraft19();},500);
 
 async function rollTargets19(job){const targets=job.selectedTargets19||[];if(!targets.length)return ownDiceRoll19(job);if(job.targetMode19!=='separate'){const result=await ownDiceRoll19({...job,label:job.label+' → '+targets.map(t=>t.name).join('、')});return {...result,summary:targets.map(t=>t.name+'：'+result.value).join('；')+' · '+result.summary};}const rows=[];for(let i=0;i<targets.length;i++){const target=targets[i];try{const r=await ownDiceRoll19({...job,id:job.id+'/target/'+i,notation:i===0?job.notation:job.otherNotation19||job.notation,label:job.label+' → '+target.name});rows.push({target:target.name,...r});}catch(err){if(!rows.length)throw err;rows.push({target:target.name,error:err.message});break;}}return {value:rows[0].value,summary:rows.map(r=>r.target+'：'+(r.error||r.summary)).join('；'),engine:'手札动画骰 · 各目标独立',targets19:rows};}
+
+OBR.onReady(()=>backgroundOwner21(async()=>{for(const fn of callbacks21)await fn();}));

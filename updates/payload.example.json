@@ -1,19 +1,19 @@
 {
   "app": "traveler-folio",
   "schema": 1,
-  "version": "0.20.0",
-  "published": "2026-10-16T00:56:08.298714+00:00",
-  "notes": "新增 EXE / APK 应用内更新：后台检查、三路镜像与自动换线、进度取消、签名校验。Windows 保存并重启更新；安卓确认后覆盖安装，保留角色记录。",
+  "version": "0.21.0",
+  "published": "2026-10-16T12:56:02.869551+00:00",
+  "notes": "线上双插件；修复骰子摘要、优势/劣势与目标清除；工具浮窗可移动缩放；独立演出角色、怪物立绘库和新版先攻。",
   "windows": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.20.0/TravelerFolio-Windows-Update.zip",
-    "size": 17094161,
-    "sha256": "7e706fb3f05fb2136d12ed1118841f09ad1b03f22500fd5251bf3a57433dc081"
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.21.0/TravelerFolio-Windows-Update.zip",
+    "size": 17150642,
+    "sha256": "a27dfe9aae39a6cca6b6b2c536e50a2dbc71daf5d3dc7399492bcf8e2fccfbab"
   },
   "android": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.20.0/TravelerFolio-Android.apk",
-    "size": 5268204,
-    "sha256": "9c30db203accd85f82a0bb8f0b92fd0b7f1dbf134d5c55983220380309fc5bdc",
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.21.0/TravelerFolio-Android.apk",
+    "size": 5272300,
+    "sha256": "168f1d5556eea6b0bb97a52b69bd359ba4767fb47a6dccd9d565df7c5b00ed9c",
     "package": "com.traveler.folio",
-    "versionCode": 23
+    "versionCode": 24
   }
 }

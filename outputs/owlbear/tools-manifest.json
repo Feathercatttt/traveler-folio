@@ -1,0 +1,16 @@
+{
+  "name": "旅人手札 · 跑团工具",
+  "version": "0.21.0",
+  "manifest_version": 1,
+  "author": "旅人手札",
+  "description": "独立跑团工具：骰子、先攻、怪物、立绘与手动生命速调。",
+  "icon": "/tools19.svg",
+  "action": {
+    "title": "跑团工具",
+    "icon": "/tools19.svg",
+    "popover": "/launcher21.html?kind=tools",
+    "width": 240,
+    "height": 72
+  },
+  "background_url": "/background.html"
+}

@@ -22,3 +22,9 @@ work/avd/
 **/*.pem
 
 work/v20-update-qa/
+
+_site/
+
+work/pages21/
+
+work/v21-update-qa/

@@ -29,7 +29,9 @@ for name in ['v0.22更新与使用说明.txt','手机与电脑使用说明.txt']
 for name in ['使用说明.txt','手机与电脑使用说明.txt','枭熊联动说明.txt','v0.22更新与使用说明.txt']:(WIN/name).write_text(guide,encoding='utf-8-sig')
 files=[p for p in tree(WIN) if p.suffix.lower()!='.txt' or 'LICENSE' in p.name.upper() or p.name in ['使用说明.txt','手机与电脑使用说明.txt','枭熊联动说明.txt','v0.22更新与使用说明.txt','THIRD-PARTY19.txt']]
 light=[p for p in files if p.name!='MicrosoftEdgeWebView2RuntimeInstallerX64.exe']
-for kind,rows in [('Full',files),('Light',light),('Update',light)]:archive(ASSETS/f'TravelerFolio-Windows-{kind}.zip',[(p,('TravelerFolio-Update/' if kind=='Update' else '旅人手札-Windows/')+p.relative_to(WIN).as_posix()) for p in rows])
+archive(O/'TravelerFolio-Windows-Full.zip',[(p,'旅人手札-Windows/'+p.relative_to(WIN).as_posix()) for p in files])
+(ASSETS/'TravelerFolio-Windows-Full.zip').unlink(missing_ok=True)
+for kind,rows in [('Light',light),('Update',light)]:archive(ASSETS/f'TravelerFolio-Windows-{kind}.zip',[(p,('TravelerFolio-Update/' if kind=='Update' else '旅人手札-Windows/')+p.relative_to(WIN).as_posix()) for p in rows])
 copy(O/'旅人手札-Android.apk',ASSETS/'TravelerFolio-Android.apk');copy(O/'旅人手札.html',ASSETS/'TravelerFolio.html')
 archive(ASSETS/'TravelerFolio-Owlbear.zip',[(p,'旅人手札/'+p.relative_to(O).as_posix()) for p in [O/'旅人手札.html',O/'v0.22更新与使用说明.txt',O/'手机与电脑使用说明.txt',O/'开启枭熊联动.cmd',O/'关闭枭熊联动.cmd',O/'fflate-LICENSE.txt',O/'qrcodegen-LICENSE.txt',*tree(O/'owlbear')]])
 # Only already-public files plus declared v21 code and static extension source.
@@ -50,7 +52,7 @@ notes='''# 旅人手札 v0.22.0 · 怪物图鉴与工具窗口更新
 - 怪物图鉴替代左侧村规手册入口，以右侧仓库打开；支持物种、分类、等级、熟练加值筛选与搜索。
 - 怪物卡分为基础属性、豁免、熟练加值、特性、动作、法术六区；可上传立绘、编辑并查看完整卡片，不可添加到玩家角色卡。
 - 修复普通工具页先攻样式覆盖导航的问题；独立顶部横向先攻条与演出窗口保留原有交互。
-- EXE、APK、离线 HTML 与两个枭熊插件统一为 v0.22.0；完整 Windows 包包含微软签名 WebView2 离线安装器。
+- EXE、APK、离线 HTML 与两个枭熊插件统一为 v0.22.0；公开 Release 提供 Windows 轻量包与应用内更新包，缺少 WebView2 时显示官方安装或浏览器打开选项。大型离线安装器仅保留在本地完整包。
 - 本地浏览器与模拟房间回归、Windows 原生检查通过。Android 模拟器 UiAutomation 在扫码步骤前故障；APK签名及嵌入网页已验证，本次未完成扫码端到端复测。真实枭熊登录房间和实体手机尚未覆盖。
 
 具体操作见 [v0.22安装与使用方法](docs/v0.22安装与使用方法.md)。
@@ -95,8 +97,8 @@ spec=importlib.util.spec_from_file_location('update_release20',W/'update-release
 archive(ASSETS/'TravelerFolio-Source.zip',[(p,'traveler-folio/'+p.relative_to(REPO).as_posix()) for p in tree(REPO)])
 (ASSETS/'README-zh-CN.txt').write_text(notes+'\n\n'+guide,encoding='utf-8-sig')
 (ASSETS/'SHA256SUMS.txt').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in sorted(ASSETS.iterdir()) if p.is_file() and p.name!='SHA256SUMS.txt'),encoding='utf8')
-for name,alias in [('TravelerFolio-Windows-Full.zip','旅人手札-Windows-v0.22.0-完整包.zip'),('TravelerFolio-Windows-Light.zip','旅人手札-Windows-v0.22.0-轻量包.zip'),('TravelerFolio-Windows-Update.zip','旅人手札-Windows-v0.22.0-更新包.zip'),('TravelerFolio-Android.apk','旅人手札-Android-v0.22.0.apk'),('TravelerFolio-Owlbear.zip','旅人手札-枭熊联动包-v0.22.0.zip'),('TravelerFolio-Source.zip','旅人手札-应用源码-v0.22.0.zip')]:copy(ASSETS/name,O/alias)
-for name in ['旅人手札-Windows.zip','旅人手札-桌面版.zip']:copy(ASSETS/'TravelerFolio-Windows-Full.zip',O/name)
+for name,alias in [('TravelerFolio-Windows-Light.zip','旅人手札-Windows-v0.22.0-轻量包.zip'),('TravelerFolio-Windows-Update.zip','旅人手札-Windows-v0.22.0-更新包.zip'),('TravelerFolio-Android.apk','旅人手札-Android-v0.22.0.apk'),('TravelerFolio-Owlbear.zip','旅人手札-枭熊联动包-v0.22.0.zip'),('TravelerFolio-Source.zip','旅人手札-应用源码-v0.22.0.zip')]:copy(ASSETS/name,O/alias)
+for name in ['旅人手札-Windows.zip','旅人手札-桌面版.zip']:copy(O/'TravelerFolio-Windows-Full.zip',O/name)
 copy(ASSETS/'TravelerFolio-Owlbear.zip',O/'旅人手札-枭熊联动包.zip');copy(ASSETS/'TravelerFolio-Source.zip',O/'旅人手札-应用源码.zip')
 report={'success':True,'version':VERSION,'checks':checks,'checkCount':len(checks),'assets':[{'name':p.name,'size':p.stat().st_size,'sha256':sha(p)} for p in sorted(ASSETS.iterdir()) if p.is_file()],'limits':['Real Owlbear multiplayer room not authenticated/tested','Android emulator UiAutomation failed before camera scan; APK metadata, signature, and embedded HTML were verified','GPU/physical phone coverage incomplete','Public mirror and Pages availability varies by network']}
 (W/'v22-delivery-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf8');print('Packaged',len(report['assets']),'assets;',len(checks),'checks',flush=True)

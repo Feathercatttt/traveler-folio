@@ -15,9 +15,8 @@
 
 | 文件 | 用途 |
 | --- | --- |
-| TravelerFolio-Windows-Full.zip | Windows x64完整包，包含WebView2离线安装器 |
-| TravelerFolio-Windows-Light.zip | 已安装WebView2时使用的轻量包 |
-| TravelerFolio-Windows-Update.zip | 软件内使用的更新包；首次安装请用完整包或轻量包 |
+| TravelerFolio-Windows-Light.zip | Windows x64安装包；缺少WebView2时可按启动提示联网安装或在浏览器打开 |
+| TravelerFolio-Windows-Update.zip | 软件内使用的更新包；首次安装使用轻量包 |
 | TravelerFolio-Android.apk | Android 8及以上，原签名可覆盖更新 |
 | TravelerFolio-Owlbear.zip | 本地HTML与枭熊联动包 |
 | TravelerFolio.html | 可直接本地打开的单文件角色卡 |
@@ -25,7 +24,7 @@
 
 v0.19及以前需先手动安装v0.20一次。之后EXE顶部“更新”、APK“更多 → 检查更新”可后台检查、镜像下载并确认安装。支持三条镜像、自动换线、签名校验和自定义镜像；公共服务不能保证所有国内网络永久可达。[更新步骤与线路设置](docs/更新与镜像下载.md)。
 
-更新前建议导出备份。APK使用原签名覆盖安装，不要卸载旧版。
+Windows公开Release不附带约214MiB的WebView2离线安装器；缺少内核时，EXE会提供微软官方联网安装或浏览器打开选项，不会静默安装。更新前建议导出备份。
 保留角色数据不会依赖解压目录；二维码提供局域网的一次性数据快照传输。
 
 ## 枭熊安装

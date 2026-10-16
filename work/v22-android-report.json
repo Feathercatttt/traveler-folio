@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "version": "0.22.0",
+  "checks": [
+    "APK package metadata versionCode 25 / versionName 0.22.0",
+    "APK carries byte-identical v0.22 offline HTML",
+    "APK v2/v3 signature validates and matches existing release signer"
+  ],
+  "limits": [
+    "Android emulator automation crashed in UiAutomationService before the camera flow; this run does not claim v0.22 camera-scan end-to-end validation"
+  ]
+}

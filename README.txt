@@ -1,10 +1,10 @@
-﻿旅人手札 v0.21.0 应用源码（数据版本10）
+﻿旅人手札 v0.22.0 应用源码（数据版本10）
 
 保留原 work/ 与 outputs/ 路径结构。所有命令从解压后的“源码”目录执行。
 现成 HTML 可以直接本地打开；APK/Windows包见独立交付文件，运行不需源码环境。
 
 HTML：python work/assemble-v13.py
-构建器使用不可变的 work/prototype-v012.html，依次加入 v13、v134、v14、v16、v17、v18、v19、v20、v21 模块。
+构建器使用不可变的 work/prototype-v012.html，依次加入 v13、v134、v14、v16、v17、v18、v19、v20、v21、v22 模块。
 请修改对应模块，勿直接修改生成的HTML。assemble同时从obr-roll-core生成共用骰子解析器。
 
 枭熊：在 outputs/owlbear/src 执行 npm install --ignore-scripts，然后 npm run build。

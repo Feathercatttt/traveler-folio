@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "checks": [
+    "Production signed v0.27.1 APK installed on Android 15; Settings update button is visible and opens native updater",
+    "Real APK check button reaches Java updater and displays native status",
+    "Closing and reopening update page keeps entry usable"
+  ],
+  "limits": [
+    "Android emulator; no physical device validation"
+  ]
+}

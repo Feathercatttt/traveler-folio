@@ -2,7 +2,7 @@
 
 可离线使用的中文 DND 角色卡工坊，以及 Owlbear Rodeo 角色卡联动与跑团工具。
 
-当前版本 **0.27.0**，角色数据格式 **10**。
+当前版本 **0.27.1**，角色数据格式 **10**。
 
 [下载最新版](https://github.com/Feathercatttt/traveler-folio/releases/latest) · [功能表与使用方法](docs/功能表与使用方法.md)
 
@@ -29,7 +29,7 @@ Windows公开Release不附带约214MiB的WebView2离线安装器；缺少内核�
 
 ## 枭熊安装
 
-[线上插件地址](https://feathercatttt.github.io/traveler-folio/) · [v0.27操作指南](docs/v0.27安装与使用方法.md)
+[线上插件地址](https://feathercatttt.github.io/traveler-folio/) · [v0.27操作指南](docs/v0.27.1安装与使用方法.md)
 
 | 独立按钮 | DM 添加的安装地址 |
 | --- | --- |

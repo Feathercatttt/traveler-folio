@@ -2,7 +2,7 @@ using System;using System.IO;using System.Text;using System.Net;using System.Col
 
 // This file is compiled into both the application and the independent installer.
 internal static class UpdateProtocol {
- internal const string Current="0.27.0", Repo="https://github.com/Feathercatttt/traveler-folio/", ManifestUrl="https://raw.githubusercontent.com/Feathercatttt/traveler-folio/main/updates/stable.json";
+ internal const string Current="0.27.1", Repo="https://github.com/Feathercatttt/traveler-folio/", ManifestUrl="https://raw.githubusercontent.com/Feathercatttt/traveler-folio/main/updates/stable.json";
  internal static readonly string[] Mirrors={"https://gh-proxy.org/","https://ghfast.top/","https://ghproxy.net/",""};
  internal static JavaScriptSerializer Serializer(){return new JavaScriptSerializer{MaxJsonLength=512*1024};}
  internal static string Text(Dictionary<string,object> x,string k){object v;return x.TryGetValue(k,out v)?Convert.ToString(v):"";}

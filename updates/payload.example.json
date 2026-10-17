@@ -1,19 +1,19 @@
 {
   "app": "traveler-folio",
   "schema": 1,
-  "version": "0.27.0",
-  "published": "2026-10-17T02:49:08.945677+00:00",
-  "notes": "怪物支持官方上传放置与覆盖选中 token，两者同步怪物列表；修正滤镜采样并可在直播控制条切换；检定公式示例支持悬停预览、触屏展开和点击复制。",
+  "version": "0.27.1",
+  "published": "2026-10-17T02:58:04.766211+00:00",
+  "notes": "修复手机版设置中更新按钮被旧样式隐藏的问题。旧版入口不可见时，请直接覆盖安装新版 APK；新版可从设置进入检查更新和切换线路。",
   "windows": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.27.0/TravelerFolio-Windows-Update.zip",
-    "size": 17197470,
-    "sha256": "61912f88a5c9b97c8575b5c448d4f988a3493920f611b7ce240be93f783c5de9"
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.27.1/TravelerFolio-Windows-Update.zip",
+    "size": 17198691,
+    "sha256": "079154107900075171863e95760a25f0c4ec57aba1ff77b4db20ef44fde32d86"
   },
   "android": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.27.0/TravelerFolio-Android.apk",
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.27.1/TravelerFolio-Android.apk",
     "size": 5292780,
-    "sha256": "c189acc1eef7e7713b586136e8237f41a22685c5dec0a95f9799ee9354379650",
+    "sha256": "a20e191caabc8a57b812077cb23b4b2d1f9aace4fb7d067def2d1c96c834d73e",
     "package": "com.traveler.folio",
-    "versionCode": 31
+    "versionCode": 32
   }
 }

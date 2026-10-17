@@ -10,6 +10,7 @@ function geometryPopover21(id,url,geo,hidePaper=true){
 }
 
 export async function openWindow21(id,path,options={}){
+ if(!OBR.isReady)await new Promise(resolve=>OBR.onReady(resolve));
  const [vw,vh]=await Promise.all([OBR.viewport.getWidth(),OBR.viewport.getHeight()]);
  let saved={};try{saved=JSON.parse(localStorage.getItem(key(id))||'{}');}catch{}
  const w=Math.max(Math.min(vw-12,options.minWidth||190),Math.min(vw-12,(!options.resetSize&&saved.w)||options.width||470));
@@ -24,6 +25,7 @@ export async function openWindow21(id,path,options={}){
 }
 
 export async function closeWindow21(id){
+ if(!OBR.isReady)await new Promise(resolve=>OBR.onReady(resolve));
  const popId=activeId(id);await OBR.popover.close(popId).catch(()=>{});
  if(popId!==id)await OBR.popover.close(id).catch(()=>{});
  if(localStorage.getItem(activeKey(id))===popId)localStorage.removeItem(activeKey(id));

@@ -2,7 +2,7 @@
 from pathlib import Path
 import hashlib,json,zipfile,shutil,subprocess,importlib.util,datetime,re
 R=Path(__file__).resolve().parent.parent;W=R/'work';O=R/'outputs';WIN=O/'旅人手札-Windows';REPO=W/'github-release19/repo';STAGE=W/'github-release25';ASSETS=STAGE/'release-assets';ASSETS.mkdir(parents=True,exist_ok=True)
-VERSION='0.25.0'
+VERSION='0.25.1'
 def normalize_readme25(s):
  s=re.sub(r'^\| 规则记录 \|.*\n','',s,flags=re.M)
  s=s.replace('| 自动更新 |','| 规则记录 | 主界面“规则” | 独立村规条目、分类搜索、编辑删除与完整备份 |\n| 自动更新 |',1)
@@ -50,8 +50,8 @@ for folder in ['windows-app','android-app/src/com/traveler/folio']:
 for p in O.glob('v0.25-*.png'):copy(p,REPO/'docs/images'/p.name)
 copy(W/'v25-guide.md',REPO/'docs/v0.25安装与使用方法.md')
 notes=(W/'v25-release-notes.md').read_text(encoding='utf8')
-(REPO/'RELEASE-NOTES.md').write_text(notes,encoding='utf8',newline='\n');ch=REPO/'CHANGELOG.md';old=ch.read_text(encoding='utf8');ch.write_text(notes+'\n\n'+old if not old.startswith('# 旅人手札 v0.25.0') else old,encoding='utf8',newline='\n')
-p=REPO/'README.md';text=p.read_text(encoding='utf8').replace('当前版本 **0.24.0**','当前版本 **0.25.0**');a=text.index('## 枭熊安装');b=text.index('## 功能表',a);text=text[:a]+'''## 枭熊安装
+(REPO/'RELEASE-NOTES.md').write_text(notes,encoding='utf8',newline='\n');ch=REPO/'CHANGELOG.md';old=ch.read_text(encoding='utf8');ch.write_text(notes+'\n\n'+old if not old.startswith('# 旅人手札 v0.25.1') else old,encoding='utf8',newline='\n')
+p=REPO/'README.md';text=p.read_text(encoding='utf8').replace('当前版本 **0.25.0**','当前版本 **0.25.1**');a=text.index('## 枭熊安装');b=text.index('## 功能表',a);text=text[:a]+'''## 枭熊安装
 
 [线上插件地址](https://feathercatttt.github.io/traveler-folio/) · [v0.25操作指南](docs/v0.25安装与使用方法.md)
 
@@ -68,11 +68,11 @@ p=REPO/'docs/功能表与使用方法.md';text=p.read_text(encoding='utf8');text
 payload={'app':'traveler-folio','schema':1,'version':VERSION,'published':datetime.datetime.now(datetime.timezone.utc).isoformat(),'notes':'固定放大先攻头像、血条与右键菜单；原生跑团工具重复开关修复；独立图鉴搜索与场上怪物改名、直接使用立绘；演出搜索筛选与删空名单后结束直播修复。'}
 for kind,name in [('windows','TravelerFolio-Windows-Update.zip'),('android','TravelerFolio-Android.apk')]:
  p=ASSETS/name;payload[kind]={'url':'https://github.com/Feathercatttt/traveler-folio/releases/download/v'+VERSION+'/'+name,'size':p.stat().st_size,'sha256':sha(p)}
- if kind=='android':payload[kind].update(package='com.traveler.folio',versionCode=28)
+ if kind=='android':payload[kind].update(package='com.traveler.folio',versionCode=29)
 spec=importlib.util.spec_from_file_location('update_release20',W/'update-release20.py');mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod);mod.sign(payload,REPO/'updates/stable.json');copy(REPO/'updates/stable.json',ASSETS/'TravelerFolio-Update.json');(REPO/'updates/payload.example.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 archive(ASSETS/'TravelerFolio-Source.zip',[(p,'traveler-folio/'+p.relative_to(REPO).as_posix()) for p in tree(REPO)])
 (ASSETS/'README-zh-CN.txt').write_text(notes+'\n\n'+guide,encoding='utf-8-sig');(ASSETS/'SHA256SUMS.txt').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in sorted(ASSETS.iterdir()) if p.is_file() and p.name!='SHA256SUMS.txt'),encoding='utf8')
-for name,alias in [('TravelerFolio-Windows-Light.zip','旅人手札-Windows-v0.25.0-轻量包.zip'),('TravelerFolio-Windows-Update.zip','旅人手札-Windows-v0.25.0-更新包.zip'),('TravelerFolio-Android.apk','旅人手札-Android-v0.25.0.apk'),('TravelerFolio-Owlbear.zip','旅人手札-枭熊联动包-v0.25.0.zip'),('TravelerFolio-Source.zip','旅人手札-应用源码-v0.25.0.zip')]:copy(ASSETS/name,O/alias)
+for name,alias in [('TravelerFolio-Windows-Light.zip','旅人手札-Windows-v0.25.1-轻量包.zip'),('TravelerFolio-Windows-Update.zip','旅人手札-Windows-v0.25.1-更新包.zip'),('TravelerFolio-Android.apk','旅人手札-Android-v0.25.1.apk'),('TravelerFolio-Owlbear.zip','旅人手札-枭熊联动包-v0.25.1.zip'),('TravelerFolio-Source.zip','旅人手札-应用源码-v0.25.1.zip')]:copy(ASSETS/name,O/alias)
 for name in ['旅人手札-Windows.zip','旅人手札-桌面版.zip']:copy(O/'TravelerFolio-Windows-Full.zip',O/name)
 copy(ASSETS/'TravelerFolio-Owlbear.zip',O/'旅人手札-枭熊联动包.zip');copy(ASSETS/'TravelerFolio-Source.zip',O/'旅人手札-应用源码.zip')
 report={'success':True,'version':VERSION,'checks':checks,'checkCount':len(checks),'assets':[{'name':p.name,'size':p.stat().st_size,'sha256':sha(p)} for p in sorted(ASSETS.iterdir()) if p.is_file()],'limits':['Real Owlbear room not authenticated/tested','Physical Android not tested','Plugins require the local EXE; all functionality is bundled in that version']}

@@ -2,7 +2,7 @@
 
 可离线使用的中文 DND 角色卡工坊，以及 Owlbear Rodeo 角色卡联动与跑团工具。
 
-当前版本 **0.25.0**，角色数据格式 **10**。
+当前版本 **0.25.1**，角色数据格式 **10**。
 
 [下载最新版](https://github.com/Feathercatttt/traveler-folio/releases/latest) · [功能表与使用方法](docs/功能表与使用方法.md)
 

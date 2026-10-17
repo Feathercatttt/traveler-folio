@@ -4,6 +4,7 @@
     "Real HTTP loads 21 referenced plugin assets, including both previously omitted styles; release handshake is v0.25",
     "Both local manifests run the real SDK/bundles through one shared background owner",
     "Actual local iframe composites fully transparent over map; 30 large portraits stay constrained after combat starts",
+    "An already processed/cancelled draft remains closable without making another roll",
     "72px portraits; fixed center/y76 with no drag; HP only when provided; right-click reroll opens final draft, remove affects combat only, stop clears combat",
     "Native tools action has no launcher or draggable popover; 3 repeated open/close cycles succeed",
     "Separate bestiary and theatre toolbar actions registered next to initiative/HP",

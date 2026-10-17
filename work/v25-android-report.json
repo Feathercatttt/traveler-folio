@@ -1,8 +1,8 @@
 {
   "success": true,
-  "version": "0.25.0",
+  "version": "0.25.1",
   "checks": [
-    "APK versionCode 28 / versionName 0.25.0",
+    "APK versionCode 29 / versionName 0.25.1",
     "APK embeds byte-identical current HTML",
     "APK signature validates and matches previous release signer"
   ],

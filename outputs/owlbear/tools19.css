@@ -22,3 +22,5 @@ body.standalone25>header,body.standalone25>nav{display:none}
 .monster-scene25 .monster-name25{text-align:left}.monster-scene25 .monster-table19{overflow-x:auto}
 .stage-search25{display:flex;gap:10px;align-items:end;margin-bottom:12px}.stage-search25 label:first-child{flex:1;min-width:0}.stage-search25 label:last-child{width:120px}
 @media(max-width:430px){.monster-filters25{grid-template-columns:repeat(2,minmax(0,1fr))}.monster-scene25 th:first-child{width:25%}.monster-scene25 th:last-child{width:55px}.monster-scene25 td:last-child button{width:23px}}
+
+.monster-image272{padding-top:8px;margin-top:10px}.monster-image272 summary{display:flex;align-items:center;gap:8px;cursor:pointer;min-width:0}.monster-image272 summary img{width:46px;height:46px;object-fit:contain;background:#14141433;border:1px solid var(--line);border-radius:5px;flex:none}.monster-image272 summary span{min-width:0;overflow-wrap:anywhere;font-size:12px}.monster-image272 summary small,.monster-image-help272{display:block;font-size:11px;color:var(--muted);margin-top:4px}.monster-image272 .row19{margin-block:8px}.monster-result25>div{min-width:0}

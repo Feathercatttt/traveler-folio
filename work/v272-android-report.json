@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "version": "0.27.2",
+  "checks": [
+    "APK versionCode 33 / versionName 0.27.2",
+    "APK embeds byte-identical current HTML",
+    "APK signature validates and matches previous release signer"
+  ],
+  "limits": [
+    "No physical Android device end-to-end test in this run"
+  ]
+}

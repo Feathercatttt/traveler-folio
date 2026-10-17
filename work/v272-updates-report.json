@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "version": "0.27.2",
+  "checks": [
+    "Android bridge 360px: Settings entry visible/tappable; opens updater, checks native state, saves route; no overflow",
+    "Android bridge 390px: Settings entry visible/tappable; opens updater, checks native state, saves route; no overflow",
+    "Android bridge 700px: Settings entry visible/tappable; opens updater, checks native state, saves route; no overflow",
+    "Android bridge 844px: Settings entry visible/tappable; opens updater, checks native state, saves route; no overflow",
+    "Web fallback still provides visible release download link"
+  ],
+  "errors": []
+}

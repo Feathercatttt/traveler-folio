@@ -40,3 +40,20 @@ html.bar24 body{margin:0;overflow:hidden}html.bar24 body main,html.bar24 #conten
 .suite-init21 .initiative-item{min-width:56px;max-width:56px;flex:0 0 56px;height:80px}.suite-init21 .initiative-item.active{height:94px}
 .suite-init21 .item-img{min-width:0;max-width:100%;max-height:80%;margin:0}.suite-init21 .item-img img{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;min-width:0;object-fit:cover!important;object-position:50% 20%}
 .suite-init21 .initiative-list label{margin:0}.suite-init21 .hbar-row-items{padding-bottom:2px}.bar24 .initiative-list{padding-bottom:19px}
+
+/* Fixed, larger portraits. HP sits below the image, the roll bonus stays in the draft. */
+.suite-init21 .initiative-item,.suite-init21 .initiative-item.active{min-width:72px;max-width:72px;width:72px;flex:0 0 72px;height:114px;transition:border-color .15s; margin-right:4px}
+.suite-init21 .item-img{height:84px;max-height:84px;border-radius:4px 4px 0 0}
+.suite-init21 .item-hp-track{top:84px;bottom:auto;left:0;right:0;height:5px;background:#482533}
+.suite-init21 .item-count{top:89px;bottom:auto;height:21px;border:0}
+.suite-init21 .item-count input{height:21px;font-size:15px}
+.suite-init21 .count-formula{bottom:-13px;font-size:10px}
+.suite-init21 .end-turn-btn{bottom:-19px;height:19px;min-height:19px;font-size:10px}
+.suite-init21 .initiative-list{cursor:default;gap:0;padding-top:2px;padding-bottom:20px}
+.initiative-menu25{position:fixed;z-index:50;min-width:146px;max-width:calc(100vw - 8px);padding:5px;box-sizing:border-box;background:#202532f5;color:#fff;border:1px solid #d8ba7866;border-radius:8px;box-shadow:0 5px 16px #0007;display:grid;gap:3px}
+.initiative-menu25 strong{font-size:11px;padding:3px 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:170px}
+.initiative-menu25 button{width:100%;padding:7px 10px;min-height:32px;text-align:left;background:#ffffff0c;border:0;color:#fff;border-radius:4px;cursor:pointer}
+.initiative-menu25 button:hover,.initiative-menu25 button:focus-visible{background:#c29a4455;outline:1px solid #d6b46b}
+html.bar24 body{height:100vh;min-height:100vh;display:flex;flex-direction:column}
+html.bar24 body main#content19{flex:1;min-height:0;height:100vh}
+.bar19 .suite-init21 .hbar-row-items{justify-content:center}

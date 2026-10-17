@@ -2,7 +2,7 @@ import {safeMedia19} from './obr-tools-model19.mjs';
 export const filters21=[['none','原色'],['memory','回忆'],['noir','黑白'],['ghost','幽魂'],['warm','暖光'],['dream','梦境'],['rain','雨幕'],['glitch','失真']];
 export const effects21=[['none','无'],['ghost','幽魂'],['silhouette','剪影'],['memory','回忆'],['fire','焰光'],['hologram','全息'],['glitch','失真'],['ice','冰霜']];
 const choose=(rows,key)=>rows.some(r=>r[0]===key)?key:'none';
-export const canStage21=(c,p)=>p?.role==='GM'||!!c&&(c.ownerId===p?.id||c.controllers?.includes(p?.id));
+export const canStage21=(c,p)=>!!c&&(p?.role==='GM'||c.ownerId===p?.id||c.controllers?.includes(p?.id));
 export function stageState21(raw){return {live:!!raw?.live,filter:choose(filters21,raw?.filter),roster21:Array.isArray(raw?.roster21)?raw.roster21:[]};}
 export function stageCommand21(raw,x,sender){const s=structuredClone(stageState21(raw)),gm=sender.role==='GM',c=s.roster21.find(r=>r.id===x.performerId),requireGM=()=>{if(!gm)throw Error('只有 DM 可以编辑演出名单与分享权限');};
  if(x.type==='stage-live'){requireGM();s.live=x.active===true;}

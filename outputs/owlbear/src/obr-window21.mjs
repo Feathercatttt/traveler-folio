@@ -3,7 +3,7 @@ import {asset21} from './obr-host21.mjs';
 
 const key=id=>`folio-window21/${id}`;
 const activeKey=id=>`${key(id)}/active-popover`;
-const activeId=id=>{const p=new URLSearchParams(location.search);return localStorage.getItem(activeKey(id))||(p.get('_win21')===id&&p.get('_popover21'))||id;};
+const activeId=id=>{const p=new URLSearchParams(location.search);return (p.get('_win21')===id&&p.get('_popover21'))||localStorage.getItem(activeKey(id))||id;};
 
 function geometryPopover21(id,url,geo,hidePaper=true){
  return {id,url,width:geo.w,height:geo.h,anchorReference:'POSITION',anchorPosition:{left:geo.x,top:geo.y},anchorOrigin:{horizontal:'LEFT',vertical:'TOP'},transformOrigin:{horizontal:'LEFT',vertical:'TOP'},disableClickAway:true,hidePaper};
@@ -12,23 +12,25 @@ function geometryPopover21(id,url,geo,hidePaper=true){
 export async function openWindow21(id,path,options={}){
  const [vw,vh]=await Promise.all([OBR.viewport.getWidth(),OBR.viewport.getHeight()]);
  let saved={};try{saved=JSON.parse(localStorage.getItem(key(id))||'{}');}catch{}
- const w=Math.max(190,Math.min(vw-12,(!options.resetSize&&saved.w)||options.width||470));
- const h=Math.max(96,Math.min(vh-12,(!options.resetSize&&saved.h)||options.height||650));
- const x=Math.max(6,Math.min(vw-w-6,saved.x??options.x??Math.max(12,(vw-w)/2)));
- const y=Math.max(6,Math.min(vh-h-6,saved.y??options.y??64));
+ const w=Math.max(Math.min(vw-12,options.minWidth||190),Math.min(vw-12,(!options.resetSize&&saved.w)||options.width||470));
+ const h=Math.max(Math.min(vh-12,options.minHeight||96),Math.min(vh-12,(!options.resetSize&&saved.h)||options.height||650));
+ const x=Math.max(6,Math.min(vw-w-6,options.fixed?(vw-w)/2:saved.x??options.x??Math.max(12,(vw-w)/2)));
+ const y=Math.max(6,Math.min(vh-h-6,options.fixed?(options.y??76):saved.y??options.y??64));
  const geo={x,y,w,h,vw,vh};localStorage.setItem(key(id),JSON.stringify(geo));
- const popId=activeId(id),url=new URL(asset21(path));
- for(const [k,v] of Object.entries({_win21:id,_popover21:popId,_x21:x,_y21:y,_w21:w,_h21:h,_minw21:options.minWidth||190,_minh21:options.minHeight||96,_glass21:options.glass?'1':'0',_hidehead21:options.hideHeader?'1':'0',_lockclose21:options.lockClose?'1':'0',_resize21:options.resize===false?'0':'1'}))url.searchParams.set(k,String(v));
+ const previous=activeId(id),popId=options.fixed?id:`${id}/window-${crypto.randomUUID()}`,url=new URL(asset21(path));
+ for(const [k,v] of Object.entries({_win21:id,_popover21:popId,_x21:x,_y21:y,_w21:w,_h21:h,_minw21:options.minWidth||190,_minh21:options.minHeight||96,_glass21:options.glass?'1':'0',_hidehead21:options.hideHeader?'1':'0',_lockclose21:options.lockClose?'1':'0',_resize21:options.resize===false?'0':'1',_fixed25:options.fixed?'1':'0',_move25:options.movable===false?'0':'1'}))url.searchParams.set(k,String(v));
  await OBR.popover.open(geometryPopover21(popId,url.href,geo,options.hidePaper!==false));
+ localStorage.setItem(activeKey(id),popId);if(previous!==popId)await OBR.popover.close(previous).catch(()=>{});
 }
 
 export async function closeWindow21(id){
  const popId=activeId(id);await OBR.popover.close(popId).catch(()=>{});
  if(popId!==id)await OBR.popover.close(id).catch(()=>{});
+ if(localStorage.getItem(activeKey(id))===popId)localStorage.removeItem(activeKey(id));
 }
 
 export function installWindow21(title,onClose,options={}){
- const p=new URLSearchParams(location.search),id=p.get('_win21');if(!id)return;
+ const p=new URLSearchParams(location.search),id=p.get('_win21');if(!id||p.get('_fixed25')==='1')return;
  const popId=p.get('_popover21')||activeId(id),minw=Number(p.get('_minw21')||190),minh=Number(p.get('_minh21')||96);
  document.body.classList.add('window21');if(p.get('_glass21')==='1')document.body.classList.add('window21-glass');
  let geo={};try{geo=JSON.parse(localStorage.getItem(key(id))||'{}');}catch{}
@@ -54,7 +56,8 @@ export function installWindow21(title,onClose,options={}){
   localStorage.setItem(activeKey(id),nextId);save();
   try{await OBR.popover.open(geometryPopover21(nextId,url.href,geo,true));await OBR.popover.close(popId).catch(()=>{});}catch(err){localStorage.setItem(activeKey(id),popId);throw err;}
  }
- const moveHandle=document.body.__window21Head,boundMove=new WeakSet();
+ const moveHandle=p.get('_move25')==='0'?null:document.body.__window21Head,boundMove=new WeakSet();
+ if(p.get('_move25')==='0'&&document.body.__window21Head){document.body.__window21Head.style.cursor='default';document.body.__window21Head.setAttribute('aria-label',title);}
  const bindMoveHandle=el=>{if(boundMove.has(el))return;boundMove.add(el);
   el.addEventListener('pointerdown',ev=>{if(ev.button!==0||(ev.target.closest('button,input,select,textarea,a')&&!el.matches('[data-window21-drag]')))return;ev.preventDefault();try{el.setPointerCapture(ev.pointerId);}catch{}drag={mode:'move',id:ev.pointerId,sx:ev.clientX,sy:ev.clientY,start:{...geo},moved:false};moveHint('拖动中');});
   el.addEventListener('pointermove',ev=>{if(!drag||drag.id!==ev.pointerId)return;const dx=ev.clientX-drag.sx,dy=ev.clientY-drag.sy;if(Math.abs(dx)+Math.abs(dy)>3)drag.moved=true;if(!drag.moved)return;geo.x=Math.max(0,Math.min(geo.vw-64,drag.start.x+dx));geo.y=Math.max(0,Math.min(geo.vh-36,drag.start.y+dy));moveHint(`松开移动到 ${Math.round(geo.x)}, ${Math.round(geo.y)}`);});

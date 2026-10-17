@@ -1,19 +1,19 @@
 {
   "app": "traveler-folio",
   "schema": 1,
-  "version": "0.27.2",
-  "published": "2026-10-17T03:15:38.148929+00:00",
-  "notes": "修复战斗中先攻改值、重骰和加值同步后不重排；怪物上传、选图绑定与放置分步，支持预览、更换绑定及修正选中怪物图片。更新 EXE 后刷新房间。",
+  "version": "0.28.0",
+  "published": "2026-10-17T08:12:52.527377+00:00",
+  "notes": "召唤物与怪物新增可选装备栏；复杂卡片预览与本地插件刷新优化；整理重复旧版说明。更新 EXE 后刷新房间。",
   "windows": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.27.2/TravelerFolio-Windows-Update.zip",
-    "size": 17200133,
-    "sha256": "1979e34f94da003658e6a182341ec34f03a7287e076c75b8769f805b6609a1e7"
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.28.0/TravelerFolio-Windows-Update.zip",
+    "size": 17193747,
+    "sha256": "d67bccb1c7e4606fcb1d9527dc4c9aa2f02f12322db38c3c17cd826c78239ebf"
   },
   "android": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.27.2/TravelerFolio-Android.apk",
-    "size": 5292780,
-    "sha256": "d1c4efb129e4bb79256d6663291fa2e198129472ad748534f82e624097f5cdbd",
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.28.0/TravelerFolio-Android.apk",
+    "size": 5300972,
+    "sha256": "2b9850d4ec9f6d34381cc7fd5abb4f78bdba4b5115d35843c5f3b83d5e6be0ae",
     "package": "com.traveler.folio",
-    "versionCode": 33
+    "versionCode": 34
   }
 }

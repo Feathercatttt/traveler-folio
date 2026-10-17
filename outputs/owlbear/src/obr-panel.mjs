@@ -41,7 +41,7 @@ function render(){
 }
 async function refresh(){
  if(busy)return;busy=true;
- try{const x=await api('/api/view?since='+revision);rooms=x.rooms;history=[...new Map([...(x.results||[]),...history19().map(r=>({...r,ok:true,actorName:'',engine:r.engine||'手札动画骰'}))].map(r=>[r.id,r])).values()].sort((a,b)=>(a.time>1e11?a.time:a.time*1000)-(b.time>1e11?b.time:b.time*1000));if(x.view){view=x.view;revision=x.revision;render();}
+ try{const x=await api('/api/view?since='+revision);rooms=x.rooms;history=[...new Map([...(x.results||[]),...history19().map(r=>({...r,ok:true,actorName:'',engine:r.engine||'手札动画骰'}))].map(r=>[r.id,r])).values()].sort((a,b)=>(a.time>1e11?a.time:a.time*1000)-(b.time>1e11?b.time:b.time*1000));if(x.view){const previous=view;view=x.view;revision=x.revision;const visible=v=>JSON.stringify({characterId:v?.characterId,characters:v?.characters,actors:v?.actors?.map(x=>({id:x.id,name:x.name,kind:x.kind})),actor:v?.actors?.find(x=>x.id===(actorId||'main'))||v?.actors?.[0],colors:v?.colors});if(visible(previous)!==visible(view))render();}
   const room=rooms.find(r=>r.roomId===OBR.room.id)||rooms[0];$('connection').textContent=ready?(room?(room.diceReady?'枭熊已连接 · 公式确认后投骰':'枭熊已连接'):'等待本机手札连接'):'等待枭熊房间；此页可预览';
   const hist=JSON.stringify(history.map(x=>x.id));if(hist!==lastVersion){lastVersion=hist;if(tab==='history')render();const last=history.at(-1);if(last)notice((last.actorName||'')+' · '+(last.label||'掷骰')+'：'+(last.ok?last.summary:last.error));}
  }catch(err){notice(err.message);token='';}finally{busy=false;}

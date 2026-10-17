@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "checks": [
+    "Summon and monster equipment independently changes AC/HP/STR; base stats remain editable; weapon formulas use entity attributes/PB",
+    "Saving an unchanged equipped summon preserves full HP above its unequipped base",
+    "Unequipping ring removes exactly its effects and clamps current HP; template and other entities retain gear",
+    "Canceling equipment edits leaves the live summon unchanged",
+    "External summon effects combine with equipment once and recalculate weapon formulas",
+    "Template equipment is opt-in; disabling hides slots and preserves inventory for later re-enable; existing summons stay independent",
+    "New summon can enable gear, search library, add a private item copy, choose a slot and save",
+    "Monster full card has equipment section and edit entry; saving changes its derived stats without editing player gear",
+    "Disabling monster equipment removes all gear effects and leaves player stats unchanged",
+    "Full backup validation and actual file reload retain entity gear, slot state and opt-in flags",
+    "Medium armor caps DEX at +2, shield stacks; invalid/duplicate slots rejected; entity @ references resolve correctly",
+    "Copying an equipped template copies its base-data links and applies equipment exactly once",
+    "Copied equipment retains @ expressions and evaluates brace/canonical aliases against the equipped entity rather than the player",
+    "390px summon and monster equipment editors fit the screen with reachable controls"
+  ],
+  "errors": []
+}

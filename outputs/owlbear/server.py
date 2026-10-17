@@ -21,6 +21,14 @@ def main():
    loaded=json.loads(cache.read_text(encoding='utf-8'));db.update({k:loaded[k] for k in db if k in loaded})
   except (OSError,ValueError):print('Previous bridge cache could not be read; keeping the file and using browser data.')
  once=OnceService18(db)
+ bestiary_cache28={'revision':-1,'monsters':[]}
+ def bestiary28():
+  if bestiary_cache28['revision']!=db['revision']:
+   raw=json.loads(db['raw']) if isinstance(db.get('raw'),str) else db.get('raw') or {}
+   computed={m['id']:m for m in (db.get('view') or {}).get('bestiary19',[]) if isinstance(m,dict) and 'id' in m}
+   bestiary_cache28['monsters']=[{**m,**computed.get(m.get('id'),{}),'portrait':m.get('portrait','')} for m in raw.get('bestiary19',[])]
+   bestiary_cache28['revision']=db['revision']
+  return bestiary_cache28['monsters']
  paths={'/manifest.json':here/'manifest.json','/panel.html':here/'panel.html','/panel.js':here/'panel.js','/background.html':here/'background.html','/background.js':here/'background.js','/style.css':here/'style.css','/icon.svg':here/'icon.svg','/card.html':folder/'旅人手札.html','/':here/'install.html','/install.html':here/'install.html','/roll.html':here/'roll.html','/roll.js':here/'roll.js','/LICENSE-sdk.txt':here/'LICENSE-sdk.txt'}
  for name in ['tools-manifest.json','launcher21.html','launcher21.js','connect21.html','results21.html','results21.js','status18.html','status18.js','tools19.html','tools19.css','tools19.js','surface19.html','surface19.js','tools19.svg','heart19.svg','target19.svg','dice-effect19.html','dice-effect19.js','LICENSE-suite19.txt','THIRD-PARTY19.txt']:paths['/'+name]=here/name
  for name in ['d4.png','d6.png','d8.png','d10.png','d12.png','d20.png','d100.png','dice.mp3','cartoon.mp3']:paths['/suite19/'+name]=here/'suite19'/name
@@ -62,7 +70,7 @@ def main():
      if p=='/api/transfer/status':self.send(200,handoff.status())
      elif p=='/api/transfer/receive':self.send(200,handoff.receive())
      elif p=='/api/state':self.send(200,db)
-     elif p=='/api/bestiary21':self.send(200,{'monsters':(json.loads(db['raw']) if isinstance(db.get('raw'),str) else db.get('raw') or {}).get('bestiary19',[])})
+     elif p=='/api/bestiary21':self.send(200,{'monsters':bestiary28()})
      elif p=='/api/view':
       since=int(q.get('since',['-1'])[0]);self.send(200,{'revision':db['revision'],'view':db['view'] if since!=db['revision'] else None,'rooms':live(),'results':results[-40:],'mainOnline':time.time()-last_main[0]<8})
      elif p=='/api/inbox':

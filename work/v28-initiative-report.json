@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "checks": [
+    "Real HTTP loads 24 referenced plugin assets, including both previously omitted styles; release handshake is v0.27",
+    "Both local manifests run the real SDK/bundles through one shared background owner",
+    "Active combat: editing final initiative immediately reorders metadata and visible strip; another numeric field retains draft and focus",
+    "Raw die input + bonus recalculates final score; Enter commits and reorders without advancing combat",
+    "Reroll result received during active combat reorders immediately and preserves current actor/round/turn",
+    "Live token/card initiative bonus updates final value and ordering while preserving original die result",
+    "Negative values sort correctly; clearing a score moves that entry behind rolled initiatives",
+    "Manual bonus override and reset to linked token bonus each recalculate and resort",
+    "Explicit manual order remains intact when only a token name changes",
+    "Score changes do not trigger turn automation, end/start a turn, or move the camera",
+    "Near-simultaneous linked-bonus sync and manual edit retain both values through the shared command queue"
+  ],
+  "errors": [],
+  "failed": [],
+  "limits": [
+    "Real SDK and served bundles in a simulated Owlbear host; no authenticated live-room session"
+  ]
+}

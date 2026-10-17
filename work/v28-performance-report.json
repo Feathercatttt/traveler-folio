@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "checks": [
+    "Same 24-formula / 16-effect fixture on released v0.27.2 and new HTML under 4x CPU throttling; full form resolution reduced during preview",
+    "Formula input p95 improved against identical previous build"
+  ],
+  "results": {
+    "before": {
+      "openMedianMs": 498,
+      "openMeanMs": 590.8,
+      "typingMedianMs": 91.7999999821186,
+      "typingP95Ms": 125.80000001192093,
+      "formDataReadsDuring60Inputs": 120,
+      "cpuThrottle": 4
+    },
+    "after": {
+      "openMedianMs": 457.7000000178814,
+      "openMeanMs": 493.2,
+      "typingMedianMs": 13.699999988079071,
+      "typingP95Ms": 25.5,
+      "formDataReadsDuring60Inputs": 0,
+      "cpuThrottle": 4
+    }
+  }
+}

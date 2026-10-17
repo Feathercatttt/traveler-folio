@@ -2,7 +2,7 @@
 function actionsClean134(rows){const ids=new Set();return (Array.isArray(rows)?rows:[]).slice(0,40).filter(x=>x&&typeof x==='object').map(x=>{let id=safe4id(x.id)?x.id:uid();if(ids.has(id))id=uid();ids.add(id);return {id,name:str4(x.name,120)||'未命名行动',cost:str4(x.cost,500),description:str4(x.description,5000)};});}
 function summonProfile5(r={}){
  const p=summonProfile5V133(r),source=(Array.isArray(r.attacks)?r.attacks:[]).slice(0,40).filter(x=>x&&typeof x==='object');
- p.attacks.forEach((a,i)=>a.cost=str4(source[i]?.cost,500));p.actions=actionsClean134(r.actions);return p;
+ p.attacks.forEach((a,i)=>a.cost=str4(source[i]?.cost,500));p.actions=actionsClean134(r.actions);p.equipment28=cleanEntityEquipment28(r.equipment28);return p;
 }
 function costTags134(text){const tags=[...new Set(String(text||'').split(/[\/／\n]+/).map(x=>x.trim()).filter(Boolean))].slice(0,12);return tags.length?'<div class="cost134-tags">'+tags.map(t=>t.length>16?'<details class="cost134-tag cost134-long"><summary><span>'+e(t)+'</span></summary><span class="cost134-full">'+e(t)+'</span></details>':'<span class="cost134-tag">'+e(t)+'</span>').join('')+'</div>':'';}
 function summonAttacks5(p,compact=false){
@@ -24,8 +24,8 @@ function summonReadProfile5(f){
 function summonEditor5(id='',instance=false,example=false){
  summonEditor5V133(id,instance,example);const button=$('summonForm')?.querySelector('[data-action="summon-attack-add"]');if(!button)return;
  button.innerHTML=icon('plus')+'添加攻击';
- button.insertAdjacentHTML('afterend','<section class="summon-actions-editor134"><h3 class="form-section">行动卡</h3><p class="form-help">用于援助、交互、施放特殊效果等行动；只需填写名称、消耗和效果。消耗用 / 分隔，例如：主要动作/银粉一份。</p><div id="summonActionRows134">'+(summonDraft5.actions||[]).map(actionRow134).join('')+'</div><button type="button" class="btn" data-action="action134-add">'+icon('plus')+'添加行动卡</button></section>');
- enhanceUniversal10(document);syncUniversal10(document,false);
+ button.insertAdjacentHTML('afterend','<section class="summon-actions-editor134"><h3 class="form-section">行动卡</h3><p class="form-help">消耗用 / 分隔，例如：主要动作/银粉一份。</p><div id="summonActionRows134">'+(summonDraft5.actions||[]).map(actionRow134).join('')+'</div><button type="button" class="btn" data-action="action134-add">'+icon('plus')+'添加行动卡</button></section>');
+ enhanceUniversal10(document);
 }
 function descriptor10(input,ss=session10(input)){
  const d=descriptor10V133(input,ss);if(!['summon','summon-instance'].includes(ss?.kind))return d;

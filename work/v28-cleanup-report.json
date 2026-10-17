@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "checks": [
+    "Compiled actual Windows updater retires only 22 named legacy guide files and retains backup copies",
+    "Current guide, licenses and user-created rules/text files remain untouched"
+  ]
+}

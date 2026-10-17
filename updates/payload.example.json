@@ -1,19 +1,19 @@
 {
   "app": "traveler-folio",
   "schema": 1,
-  "version": "0.25.1",
-  "published": "2026-10-17T01:51:57.550235+00:00",
-  "notes": "固定放大先攻头像、血条与右键菜单；原生跑团工具重复开关修复；独立图鉴搜索与场上怪物改名、直接使用立绘；演出搜索筛选与删空名单后结束直播修复。",
+  "version": "0.26.0",
+  "published": "2026-10-17T02:19:38.780247+00:00",
+  "notes": "左侧设置统一风格、备份、互通、浮窗、打印与更新；统一收藏库，藏书架/怪物图鉴改为大页面；大卡模糊搜索定位、显式检定按钮与收藏筛选；简化特性编辑、可选属性与编辑备注，预览不重复。",
   "windows": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.25.1/TravelerFolio-Windows-Update.zip",
-    "size": 17174006,
-    "sha256": "9b75683381bc020f1b14e410a72ad56f8239084ee625c81959526befc2d340bf"
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.26.0/TravelerFolio-Windows-Update.zip",
+    "size": 17182776,
+    "sha256": "bb974339f8862048382f3d9657326ff7de5ea508fdb91ede7ab02a521e9a3617"
   },
   "android": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.25.1/TravelerFolio-Android.apk",
-    "size": 5280492,
-    "sha256": "38f3f348f4770dfcf4e5092ec141939c052966b3214a12555ca26e1fe1bb0d94",
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.26.0/TravelerFolio-Android.apk",
+    "size": 5292780,
+    "sha256": "47ba0626ede951ea0ff31a878ff67e4f6147621290ffd25592748d934aea8868",
     "package": "com.traveler.folio",
-    "versionCode": 29
+    "versionCode": 30
   }
 }

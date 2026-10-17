@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "checks": [
+    "Instructions button becomes rules; create/edit/search/cancel/close work; redundant mini button removed",
+    "Rules survive reload and full JSON validation/import",
+    "Mobile rules fit 390px; delete and close leave no visible overlay"
+  ],
+  "errors": []
+}

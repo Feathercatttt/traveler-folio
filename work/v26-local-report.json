@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "checks": [
+    "Real HTTP loads 21 referenced plugin assets, including both previously omitted styles; release handshake is v0.26",
+    "Both local manifests run the real SDK/bundles through one shared background owner",
+    "Actual local iframe composites fully transparent over map; 30 large portraits stay constrained after combat starts",
+    "An already processed/cancelled draft remains closable without making another roll",
+    "72px portraits; fixed center/y76 with no drag; HP only when provided; right-click reroll opens final draft, remove affects combat only, stop clears combat",
+    "Native tools action has no launcher or draggable popover; 3 repeated open/close cycles succeed",
+    "Separate bestiary and theatre toolbar actions registered next to initiative/HP",
+    "Interactive fullscreen layer blocks outside controls as in the reported bug; its own cue can resize, switch expressions, enter/leave and end live, restoring map access",
+    "Live search with no matches and deletion of final performer keep End live usable; empty live can stop, restart and stop with no blocking overlay",
+    "Card formula -> actual confirmation iframe -> advantage/disadvantage -> built-in dice animation -> mini history, using only served release files",
+    "Bestiary starts empty; species filter/name search find templates; 5 placements use the uploaded portrait with no picker, unique 1-5 names and independent HP; compact scene-only table edits names/HP and reopens",
+    "Theatre editor supports name/roster filters; roster button stays inline and never opens a second live cue",
+    "Real SDK toolbar events open dedicated empty bestiary twice; theatre action starts one live surface and ends it without a legacy cue"
+  ],
+  "errors": [],
+  "failed": [],
+  "unknown": []
+}

@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "checks": [
+    "An actual old Folio service in the same installation folder is stopped and replaced with v0.25",
+    "A service from a different folder is rejected and kept running"
+  ],
+  "errors": []
+}

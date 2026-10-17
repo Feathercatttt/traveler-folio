@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "checks": [
+    "All nine documented examples run on the actual dice engine, including keep/drop and Chinese annotations",
+    "Desktop quick-check button opens on hover, copies a usable advantage expression to the real clipboard and shows confirmation",
+    "Keyboard focus/Enter/Escape and outside-click close the helper without triggering a roll",
+    "390px touch opens, scrolls and copies examples with no horizontal overflow"
+  ],
+  "errors": []
+}

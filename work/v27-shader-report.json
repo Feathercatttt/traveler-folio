@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "checks": [
+    "none: SkSL compile, non-black pixels, preserved alpha, viewport pan/zoom",
+    "memory: SkSL compile, non-black pixels, preserved alpha, viewport pan/zoom",
+    "noir: SkSL compile, non-black pixels, preserved alpha, viewport pan/zoom",
+    "ghost: SkSL compile, non-black pixels, preserved alpha, viewport pan/zoom",
+    "warm: SkSL compile, non-black pixels, preserved alpha, viewport pan/zoom",
+    "dream: SkSL compile, non-black pixels, preserved alpha, viewport pan/zoom",
+    "rain: SkSL compile, non-black pixels, preserved alpha, viewport pan/zoom",
+    "glitch: SkSL compile, non-black pixels, preserved alpha, viewport pan/zoom"
+  ],
+  "runtime": "Skia CanvasKit 0.41.1 CPU runtime effects",
+  "limits": [
+    "Authentic Owlbear room GPU rendering still requires in-room validation"
+  ]
+}

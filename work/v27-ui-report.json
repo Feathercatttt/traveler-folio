@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "checks": [
+    "One favorites button; settings replace top/right tools and sidebar import/transfer; no exposed version strip",
+    "Settings expose style, export/import, transfer, floating window, print, updates/version; nested style editor opens normally",
+    "Shelves occupy main page with editable grid; floating library shares three types and favorites toggle; closing floating library restores shelves, closing shelves restores character",
+    "Bestiary uses main-page surface; full monster/back/close restore the character with no overlay",
+    "Collapsed trait preview prefers flavor; expanded preview hides, full flavor/rules each display once, and no-flavor fallback works",
+    "Trait fuzzy subsequence search jumps/expands matching card and reveals a result hidden by favorites filter",
+    "Items/spells have favorites filters and fuzzy jump; overview checks locate without rolling, explicit dice button rolls, keyboard results navigate",
+    "Trait editor merges basics; optional ability groups can toggle off/on without losing draft; INT/CHA choices, job source and edit-only notes save and import correctly",
+    "Overview search also locates proficiency, passive perception, temporary HP and HP maximum",
+    "Print from settings returns to character; actual exported backup retains notes and card data",
+    "Disabling optional ability choices/job override saves cleanly and returns growth to automatic source",
+    "Edit-only notes and optional choices persist through real localStorage reload",
+    "390px settings/shelves/bestiary fit screen, bottom navigation works, close/back leave only character page"
+  ],
+  "errors": []
+}

@@ -1,3 +1,4 @@
+import {formulaHelpHTML27,installFormulaHelp27} from './obr-formula-help27.mjs';
 import {advantageControls21} from './obr-advantage21.mjs';
 import {bridgeAPI21 as api,asset21,connectLocal21,backgroundOwner21} from './obr-host21.mjs';
 import {openWindow21,closeWindow21,installWindow21} from './obr-window21.mjs';
@@ -28,3 +29,6 @@ function renderTargets19(){const rows=draft.targets19||[];$('targets19').hidden=
 function withoutOnce19(notation){let result=notation;if($('targetMode19').value!=='separate')return result;for(const row of (draft.once18||[]).slice().reverse()){const box=document.querySelector('[data-once18="'+CSS.escape(row.key)+'"]');if(!box?.checked)continue;const part='+('+row.expression+')',at=result.lastIndexOf(part);if(at<0)throw Error('多目标独立掷骰时，请保留待用骰子的自动片段，或取消其勾选后手动调整公式');result=result.slice(0,at)+result.slice(at+part.length);}rollText(result,()=>1);return result;}
 
 advantageControls21($('notation'),preview);installWindow21('确认本次公式',()=>$('cancel').click());
+
+document.querySelector('label[for="notation"]').insertAdjacentHTML('beforebegin','<div class="formula-help27-title">检定公式'+formulaHelpHTML27()+'</div>');
+installFormulaHelp27(document);

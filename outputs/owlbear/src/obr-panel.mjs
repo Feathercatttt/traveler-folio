@@ -1,3 +1,4 @@
+import {formulaHelpHTML27,installFormulaHelp27} from './obr-formula-help27.mjs';
 import {bridgeAPI21 as api,asset21,connectLocal21,backgroundOwner21} from './obr-host21.mjs';
 import {openWindow21,installWindow21} from './obr-window21.mjs';
 import {history19} from './obr-dice19.mjs';
@@ -30,7 +31,7 @@ function render(){
   for(const [title,rows] of [['属性检定',a.abilities],['技能',a.skills],['豁免',a.saves]])if(rows.length)html+='<details '+(title==='技能'||a.kind==='summon'?'open':'')+'><summary>'+title+'</summary><div class="check-list">'+rows.map(x=>'<div><button class="check-name14" data-roll="'+escape(x.formula)+'" data-label="'+escape(x.label+(title==='豁免'?'豁免':'检定'))+'">'+escape(x.label)+'</button>'+rollButton(x.formula,x.label+(title==='豁免'?'豁免':'检定'))+'</div>').join('')+'</div></details>';
   if(a.savesText)html+='<details open><summary>豁免与技能记录</summary><p>'+escape(a.savesText)+'</p></details>';
  }
- if(tab==='checks')html=checkSearchHTML17(a)+bonusHTML17(view,a)+html;
+ if(tab==='checks')html=checkSearchHTML17(a).replace('<label>快速检定',formulaHelpHTML27()+'<label>快速检定')+bonusHTML17(view,a)+html;
  if(tab==='favorites')html=favoritesHTML17(a,cardHTML);
  if(tab==='traits')html=a.cards.filter(c=>c.type==='trait').map(cardHTML).join('');
  if(tab==='formulas')html=a.cards.filter(c=>c.type!=='trait'||c.favorite&&c.formulas.length).map(cardHTML).join('');
@@ -73,3 +74,5 @@ OBRTools19();OBR.onReady(()=>OBR.broadcast.onMessage('local.adventurer-folio/too
 // The mini card uses Owlbear's native action popover, so it can be pinned.
 const size23=document.createElement('div');size23.className='mini-window23';size23.innerHTML='<button type="button" data-mini-size23="small" title="缩小速查卡" aria-label="缩小速查卡">−</button><button type="button" data-mini-size23="large" title="放大速查卡" aria-label="放大速查卡">＋</button><button type="button" data-mini-close23 title="关闭速查卡" aria-label="关闭速查卡">×</button>';document.querySelector('header').prepend(size23);
 size23.onclick=async ev=>{const b=ev.target.closest('button');if(!b)return;try{if(b.hasAttribute('data-mini-close23'))await OBR.action.close();else{const small=b.dataset.miniSize23==='small';await Promise.all([OBR.action.setWidth(small?360:520),OBR.action.setHeight(small?560:800)]);}}catch{notice('请使用枭熊原生窗口的关闭与固定按钮');}};
+
+installFormulaHelp27(document);

@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference='Stop'
+$ErrorActionPreference='Stop'
 $folioFolder=Split-Path -Parent $MyInvocation.MyCommand.Path
 $folioBase='http://localhost:17632'
 try {
@@ -6,7 +6,7 @@ try {
   $folioSession=$null
   try {$folioSession=Invoke-RestMethod -Uri "$folioBase/api/session" -TimeoutSec 2} catch {}
   if($folioSession -and $folioSession.app -eq 'adventurer-folio-owlbear') {
-    if($folioSession.version -ne '0.26.0'){throw '旧版本地插件仍在运行，请关闭旧版手札和桥接后重开新版。'}
+    if($folioSession.version -ne '0.27.0'){throw '旧版本地插件仍在运行，请关闭旧版手札和桥接后重开新版。'}
     $folioRunning=$true
   }
   if(-not $folioRunning) {

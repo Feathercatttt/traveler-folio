@@ -13,3 +13,6 @@ body.cue21 .window21-head{min-height:26px;padding-block:1px;background:rgba(22,2
 .stage-cue-actions23{display:flex;flex-direction:column;gap:5px;flex:none;max-width:94px}.stage-cue-actions23>button{min-height:27px;padding:3px 7px;font-size:10px}.stage-cue-actions23 .stage-waiting21{font-size:9px;white-space:normal}.stage-dock-empty-note21{margin:3px 8px;font-size:10px;background:rgba(22,24,30,.5);border-radius:4px}
 
 .cue-search25{margin:0 4px 4px;font-size:11px;color:#eee}.cue-search25 summary{cursor:pointer;opacity:.8;min-height:18px}.cue-search25>div{display:flex;gap:5px;padding:4px 0}.cue-search25 input,.cue-search25 select{background:#18202acc;border:1px solid #ffffff40;color:#fff;border-radius:4px;min-height:28px;font:12px sans-serif;min-width:0}.cue-search25 input{width:100%;flex:1}.cue-search25 select{width:70px}.surface-cue24{max-height:calc(100vh - 16px);overflow:auto}
+
+/* Live controls share the interactive theatre surface. */
+.stage-live-actions27{display:flex;flex-direction:column;gap:5px;flex:none;width:84px}.stage-live-actions27 label{font-size:10px;color:#e1d6e6}.stage-live-actions27 select{display:block;width:84px;min-height:26px;font-size:11px;margin-top:3px}.stage-live-actions27 .stage-end-live21{width:100%}

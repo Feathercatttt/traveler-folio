@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "checks": [
+    "Real HTTP loads 24 referenced plugin assets, including both previously omitted styles; release handshake is v0.27",
+    "Both local manifests run the real SDK/bundles through one shared background owner",
+    "Actual local iframe composites fully transparent over map; 30 large portraits stay constrained after combat starts",
+    "An already processed/cancelled draft remains closable without making another roll",
+    "72px portraits; fixed center/y76 with no drag; HP only when provided; right-click reroll opens final draft, remove affects combat only, stop clears combat",
+    "Native tools action has no launcher or draggable popover; 3 repeated open/close cycles succeed",
+    "Separate bestiary and theatre toolbar actions registered next to initiative/HP",
+    "DM changes/reset filters inside live surface; exactly one local post-process effect, removed on Original/end",
+    "Interactive fullscreen layer blocks outside controls as in the reported bug; its own cue can resize, switch expressions, enter/leave and end live, restoring map access",
+    "Live search with no matches and deletion of final performer keep End live usable; empty live can stop, restart and stop with no blocking overlay",
+    "Mini quick checks: hover/click formula examples and real clipboard fallback",
+    "Card formula -> actual confirmation iframe -> advantage/disadvantage -> built-in dice animation -> mini history, using only served release files",
+    "Official upload receives original portrait File; picker cancel and upload error do not place; five instances use shared HTTPS URL, numbered names, one cached successful upload",
+    "Single selected token overwritten, renamed and registered with independent vitals; image/position/owner/unrelated metadata preserved; no/multiple selection and player-card binding rejected",
+    "Uploaded and overwritten tokens both appear in the same six-row scene list; list name/HP edits persist without touching template or other instances",
+    "Theatre editor supports name/roster filters; roster button stays inline and never opens a second live cue",
+    "Real SDK toolbar events open dedicated empty bestiary twice; theatre action starts one live surface and ends it without a legacy cue"
+  ],
+  "errors": [],
+  "failed": [],
+  "unknown": []
+}

@@ -13,3 +13,5 @@
 .mini-window23{display:flex;gap:4px;float:right}.mini-window23 button{width:28px;min-width:28px;height:28px;min-height:28px;padding:0;font-size:17px}.empty p{overflow-wrap:anywhere}
 
 header>.mini-window23{order:4;flex:0 0 auto;margin-left:auto;gap:3px}header>.mini-window23 button{flex:none}
+
+.connection-row29{display:flex;align-items:center;gap:8px;padding:0 12px}.connection-row29 .connection{flex:1;min-width:0;padding-inline:0}.connection-row29 button{flex:0 0 auto;min-height:34px;font-weight:650}.connection-row29 button[aria-busy=true]{opacity:.7}

@@ -21,6 +21,7 @@ def main():
    loaded=json.loads(cache.read_text(encoding='utf-8'));db.update({k:loaded[k] for k in db if k in loaded})
   except (OSError,ValueError):print('Previous bridge cache could not be read; keeping the file and using browser data.')
  once=OnceService18(db)
+ manual_sync29={}
  bestiary_cache28={'revision':-1,'monsters':[]}
  def bestiary28():
   if bestiary_cache28['revision']!=db['revision']:
@@ -71,6 +72,9 @@ def main():
      elif p=='/api/transfer/receive':self.send(200,handoff.receive())
      elif p=='/api/state':self.send(200,db)
      elif p=='/api/bestiary21':self.send(200,{'monsters':bestiary28()})
+     elif p=='/api/manual-sync29':
+      request=manual_sync29.get(q.get('id',[''])[0])
+      self.send(200,request) if request else self.send(404,{'error':'同步请求已过期，请再次同步'})
      elif p=='/api/view':
       since=int(q.get('since',['-1'])[0]);self.send(200,{'revision':db['revision'],'view':db['view'] if since!=db['revision'] else None,'rooms':live(),'results':results[-40:],'mainOnline':time.time()-last_main[0]<8})
      elif p=='/api/inbox':
@@ -108,6 +112,18 @@ def main():
       else:self.send(200,result)
      except ValueError as error:self.send(400,{'error':str(error)})
      return
+    elif p=='/api/manual-sync29':
+     uid=str(payload.get('id',''))[:100]
+     if not uid:self.send(400,{'error':'Missing sync id'});return
+     if uid in manual_sync29:self.send(200,manual_sync29[uid]);return
+     if len(commands)>=100:self.send(429,{'error':'待处理操作过多，请稍后同步'});return
+     if len(manual_sync29)>=100:manual_sync29.pop(next(iter(manual_sync29)))
+     request={'id':uid,'status':'pending','requested':time.time()};manual_sync29[uid]=request
+     commands.append({'id':uid,'type':'manual-sync29'});self.send(200,request);return
+    elif p=='/api/manual-sync29-result':
+     request=manual_sync29.get(payload.get('id'))
+     if not request:self.send(404,{'error':'同步请求已过期'});return
+     request.update(status='error',error=str(payload.get('error','同步未完成'))[:400]);self.send(200,request);return
     elif p=='/api/state':
      if payload.get('revision')!=db['revision']:self.send(409,{'revision':db['revision']});return
      raw=payload.get('raw');view=payload.get('view')
@@ -120,6 +136,8 @@ def main():
      once.acknowledge()
      try:persist()
      except OSError:self.send(500,{'error':'Local bridge could not save its cache'});return
+     request=manual_sync29.get(payload.get('manualSync29'))
+     if request:request.update(status='done',revision=db['revision'],completed=time.time())
      self.send(200,{'revision':db['revision']})
     elif p=='/api/heartbeat':
      worker=str(payload.get('worker',''))[:100];room=str(payload.get('roomId',''))[:100]

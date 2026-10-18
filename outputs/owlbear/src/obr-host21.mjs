@@ -6,7 +6,7 @@ export const asset21=path=>{const u=new URL(path.replace(/^\/+/ ,''),hosted21?'h
 const LOCAL='http://localhost:17632';let token='',retryAt=0;
 window.__folioBridgeOwner21=location.pathname.endsWith('/background.html');
 export const bridgeStatus21=()=>({online:!!token,hosted:false,direct:true});
-export async function connectLocal21(){retryAt=0;await remote21('/api/view?since=-1');return {ok:true};}
+export async function connectLocal21(force=false){if(force)token='';retryAt=0;return {ok:true,...await remote21('/api/view?since=-1')};}
 async function remote21(path,body){
  if(Date.now()<retryAt)throw Error('本地服务正在重新连接，请确认新版手札已打开');
  const headers={...(body?{'Content-Type':'application/json'}:{})},base=hosted21?LOCAL:'';

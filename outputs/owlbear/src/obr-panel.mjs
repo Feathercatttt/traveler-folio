@@ -7,8 +7,8 @@ import OBRTools19,{subscribeToSfx,primeAudio19} from './obr-panel-tools19.mjs';
 import {rollContext18,selectOnce18} from './obr-once-core.mjs';
 import {bonusHTML17,installPanelExtras17,favoritesHTML17,checkSearchHTML17} from './obr-panel-extra.mjs';
 import OBR from '@owlbear-rodeo/sdk';
-import {bindSelected16,unbindActor16,actorBinding16} from './obr-token-sync.mjs';
-let token='',revision=-1,view=null,actorId='main',tab='checks',ready=false,rooms=[],busy=false,history=[],lastVersion='',lastTab='';
+import {bindSelected16,unbindActor16,actorBinding16,syncBoundTokens16,syncOtherCards19} from './obr-token-sync.mjs';
+let token='',revision=-1,view=null,actorId='main',tab='checks',ready=false,rooms=[],busy=false,manualBusy29=false,history=[],lastVersion='',lastTab='';
 const $=id=>document.getElementById(id),escape=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const hpInputs14=new Map();
 const prefs={engine:localStorage.getItem('folio-ob-engine')||'auto',audience:localStorage.getItem('folio-ob-audience')||'self'};
@@ -40,11 +40,21 @@ function render(){
  const focusId=document.activeElement?.id,focused=['hpAmount14','bonusExpression17','bonusReason17','bonusTarget17','favoriteSearch17','checkSearch17'].includes(focusId),selection=focused?document.activeElement.value:null,caret=focused?document.activeElement.selectionStart:null;const content=$('content'),top=lastTab===tab?content.scrollTop:0,folds=lastTab===tab?[...content.querySelectorAll('details')].map(x=>x.open):[];content.innerHTML=html||'<p class="empty">暂时没有记录。</p>';content.querySelectorAll('details').forEach((x,i)=>{if(folds[i]!==undefined)x.open=folds[i]});content.scrollTop=top;lastTab=tab;if(focused&&$(focusId)){$(focusId).value=selection;$(focusId).focus();if(caret!==null&&$(focusId).setSelectionRange)$(focusId).setSelectionRange(caret,caret);}
 }
 async function refresh(){
- if(busy)return;busy=true;
+ if(busy||manualBusy29)return;busy=true;
  try{const x=await api('/api/view?since='+revision);rooms=x.rooms;history=[...new Map([...(x.results||[]),...history19().map(r=>({...r,ok:true,actorName:'',engine:r.engine||'手札动画骰'}))].map(r=>[r.id,r])).values()].sort((a,b)=>(a.time>1e11?a.time:a.time*1000)-(b.time>1e11?b.time:b.time*1000));if(x.view){const previous=view;view=x.view;revision=x.revision;const visible=v=>JSON.stringify({characterId:v?.characterId,characters:v?.characters,actors:v?.actors?.map(x=>({id:x.id,name:x.name,kind:x.kind})),actor:v?.actors?.find(x=>x.id===(actorId||'main'))||v?.actors?.[0],colors:v?.colors});if(visible(previous)!==visible(view))render();}
   const room=rooms.find(r=>r.roomId===OBR.room.id)||rooms[0];$('connection').textContent=ready?(room?(room.diceReady?'枭熊已连接 · 公式确认后投骰':'枭熊已连接'):'等待本机手札连接'):'等待枭熊房间；此页可预览';
   const hist=JSON.stringify(history.map(x=>x.id));if(hist!==lastVersion){lastVersion=hist;if(tab==='history')render();const last=history.at(-1);if(last)notice((last.actorName||'')+' · '+(last.label||'掷骰')+'：'+(last.ok?last.summary:last.error));}
  }catch(err){notice(err.message);token='';}finally{busy=false;}
+}
+async function manualSync29(){
+ if(manualBusy29)return;const button=$('manualSync29');manualBusy29=true;button.disabled=true;button.setAttribute('aria-busy','true');button.textContent='同步中…';notice('正在请求本机 EXE 发布最新角色数据…');
+ try{const until=Date.now()+14000;while(busy){if(Date.now()>until)throw Error('连接繁忙，请稍后再次同步');await new Promise(r=>setTimeout(r,50));}
+  await connectLocal21(true);const id=crypto.randomUUID();await api('/api/manual-sync29',{id});let status;
+  while(Date.now()<until){status=await api('/api/manual-sync29?id='+encodeURIComponent(id));if(status.status==='done')break;if(status.status==='error')throw Error(status.error||'本机角色卡同步失败');await new Promise(r=>setTimeout(r,200));}
+  if(status?.status!=='done')throw Error('没有收到本机 EXE 的同步确认，请打开角色卡后重试；不会读取 DM 的角色卡');
+  const x=await connectLocal21(true);if(!x.view||Number(x.revision)<status.revision)throw Error('本机角色卡尚未发布完整数据，请再次同步');view=x.view;revision=x.revision;rooms=x.rooms||[];render();
+  let message='已从本机 EXE 同步：'+(actor()?.name||view.characterName||'角色卡');if(ready&&await OBR.scene.isReady())try{await setMiniActor19(view,actor(),true);await syncBoundTokens16(view);await syncOtherCards19(view);}catch{message+='；棋子数值请检查编辑权限';}notice(message);$('connection').textContent='本机 EXE 已同步 · 确认后投骰';
+ }catch(e){notice('同步未完成：'+e.message);}finally{manualBusy29=false;button.disabled=false;button.removeAttribute('aria-busy');button.textContent='同步本机';}
 }
 async function sendRoll(notation,label,report=false){
  try{const a=actor();await api('/api/request',{id:crypto.randomUUID(),type:report?'report':'roll',characterId:view.characterId,actorId:actor().id,once18:report?[]:selectOnce18(actor(),rollContext18(label)),notation,label,actorName:a.name,roomId:ready?OBR.room.id:'',...prefs});notice('已打开草稿：'+notation+'，确认后才掷骰');}
@@ -52,6 +62,7 @@ async function sendRoll(notation,label,report=false){
 }
 document.addEventListener('click',async ev=>{
  const b=ev.target.closest('button');if(!b)return;
+ if(b.id==='manualSync29'){await manualSync29();return;}
  if(b.dataset.tab){tab=b.dataset.tab;render();}
  if(b.hasAttribute('data-open-card')){try{await api('/api/command',{id:crypto.randomUUID(),type:'focus-main'});notice('已唤回电脑角色卡');}catch(err){notice('请先打开电脑端旅人手札EXE，插件会自动连接。');}return;}
  if(b.dataset.token16){if(!ready){notice('请在枭熊房间中使用棋子绑定');return;}b.disabled=true;try{if(b.dataset.token16==='bind'){const item=await bindSelected16(view,actor());$('tokenStatus16').textContent='已绑定：'+(item.name||'选中的棋子')+' · 使用 Stat Bubbles';notice('已绑定并同步HP、生命上限、临时生命和AC');}else{await unbindActor16(view,actor().id);$('tokenStatus16').textContent='已解除绑定；棋子现有数值保留';}}catch(err){notice(err.message);}finally{b.disabled=false;}return;}

@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "checks": [
+    "Positive/negative flat summon attack and damage modifiers append to dice formulas without evaluation; actual tabs, library and detail clicks remain usable",
+    "Summon equips main-inventory references without creating copies; quantities stay total, availability is reserved, and HP/AC/weapon formulas use summon stats",
+    "Another summon cannot reuse a one-quantity item; two copies allow two separate summons, with zero remaining availability",
+    "Main character cannot equip a weapon whose only copy is currently borrowed by a summon",
+    "Canceling an equipment draft does not release or alter a live loan",
+    "Unequipping releases the item immediately; main-character equipment occupies the copy and prevents borrowing it",
+    "Editing the original main-inventory item updates the summon live instead of leaving a stale private snapshot",
+    "Reducing inventory quantity reconciles excess reservations deterministically and removes only the unavailable equipment effects",
+    "Inventory references, reservations and equipped stats survive backup validation and actual local-storage reload",
+    "Phone equipment form fits 390px and exposes main-inventory search and all equipment slots"
+  ],
+  "errors": []
+}

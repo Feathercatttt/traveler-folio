@@ -5,7 +5,7 @@ const favorites26={trait:false,item:false,spell:false},queries26=new Map();
 const libraryContexts26={page:{type:'trait',fav:false,query:''},floating:{type:'trait',fav:true,query:''}};
 function rawCard4(card,raw){rawCard4V26(card,raw);card.editorNote26=String(raw?.editorNote26??'').slice(0,4000);}
 function readCard4(form,card){return {...readCard4V26(form,card),editorNote26:String(form.get('editor-note26')??card.editorNote26??'').slice(0,4000)};}
-function settingsOpen26(){closeMenu();const d=$('settings26'),mobile=MOBILE13.matches||platform13()==='android';$('settingsVersion26').textContent='旅人手札 · v'+(updateState20.current||'0.29.0');const quick=d.querySelector('[data-action="floating-open"]');if(quick)quick.innerHTML=icon('eye')+(mobile?'角色速查':'桌面浮窗');if(!d.open)d.showModal();}
+function settingsOpen26(){closeMenu();const d=$('settings26'),mobile=MOBILE13.matches||platform13()==='android';$('settingsVersion26').textContent='旅人手札 · v'+(updateState20.current||'0.29.1');const quick=d.querySelector('[data-action="floating-open"]');if(quick)quick.innerHTML=icon('eye')+(mobile?'角色速查':'桌面浮窗');if(!d.open)d.showModal();}
 function view26(view){
  mainView26=view;document.body.dataset.mainView26=view;
  document.querySelector('.columns').hidden=view!=='character';$('shelves26').hidden=view!=='bookshelf';$('bestiaryPage26').hidden=view!=='bestiary';

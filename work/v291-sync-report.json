@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "checks": [
+    "PLAYER small card requests a fresh acknowledged publish from its own running EXE, bypasses stale cache, updates only its bound token and preserves targets; GM local data remains untouched",
+    "Separate GM and PLAYER local services both work, with no DM-only card read or room-member fallback",
+    "Restarted empty bridge with rotated session token is recovered; stale main/plugin credentials refresh and current EXE data is republished",
+    "Missing EXE acknowledgement reports failure without pretending cached data is fresh; retry button remains usable",
+    "Real QR UI starts with app 0.29.1 / protocol 0.21 and serves a valid full-character handoff, without the false old-version warning",
+    "Phone-style native HTTP upload is received and previews an independent item library before confirmation; QR session closes after handoff",
+    "QR open, close and reopen works repeatedly with one service and releases the port",
+    "Closing QR while start is pending cancels it and does not leave an invisible sharing service running"
+  ],
+  "errors": []
+}

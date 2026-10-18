@@ -1,19 +1,19 @@
 {
   "app": "traveler-folio",
   "schema": 1,
-  "version": "0.29.0",
-  "published": "2026-10-18T13:21:57.333555+00:00",
-  "notes": "修复扫码误报旧版、召唤物页面崩溃；召唤物借用主卡背包装备；枭熊小卡新增同步本机。更新 EXE 后刷新房间。",
+  "version": "0.29.1",
+  "published": "2026-10-18T13:41:51.336999+00:00",
+  "notes": "枭熊绑定角色与召唤物时自动显示地图名称标签，改名后自动同步。更新 EXE 后刷新房间。",
   "windows": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.29.0/TravelerFolio-Windows-Update.zip",
-    "size": 17199852,
-    "sha256": "708007faa0d0950c303f6355d13ef3239343aaedd919c9699e4fb4fe2af180cb"
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.29.1/TravelerFolio-Windows-Update.zip",
+    "size": 17200666,
+    "sha256": "72de5d4ea2c608724c22f294f31d9a09d9782fe563639855095846bcdb965144"
   },
   "android": {
-    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.29.0/TravelerFolio-Android.apk",
+    "url": "https://github.com/Feathercatttt/traveler-folio/releases/download/v0.29.1/TravelerFolio-Android.apk",
     "size": 5305068,
-    "sha256": "6f1d9a5b67e50bb47c70d67f1990b3774647eabe1d13db06bd9777833c6ebaa1",
+    "sha256": "edb5e2747360c4f02ec39c8dc45b1a13c78e31bf49fbc8bc4c0404cd7cd28e09",
     "package": "com.traveler.folio",
-    "versionCode": 35
+    "versionCode": 36
   }
 }

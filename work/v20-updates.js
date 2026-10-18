@@ -1,5 +1,5 @@
 /* Native updater only; character data and update preferences are stored separately. */
-let updateState20={phase:'idle',current:'0.29.0',automatic:true,revision:0},updateNotice20='';
+let updateState20={phase:'idle',current:'0.29.1',automatic:true,revision:0},updateNotice20='';
 async function updateRequest20(action,fields={}){
  try{const raw=platform13()==='android'?FolioNative.update20(JSON.stringify({action,...fields})):await hostRequest13('update20',{action,...fields});const value=typeof raw==='string'?JSON.parse(raw):raw;if(value.error)throw Error(value.error);onUpdate20(value);return value;}catch(err){if($('update20Status')){$('update20Status').textContent=err.message;$('update20Status').setAttribute('role','alert');}else toast(err.message);throw err;}
 }

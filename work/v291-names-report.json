@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "checks": [
+    "PLAYER clicks actual small-card Bind: token name and native visible label become card name, rich/text labels convert correctly, style/image/position/scale/rotation/lock/unrelated metadata remain",
+    "Renaming active card auto-updates bound token via real background polling, without rebinding",
+    "Inactive character snapshot also updates token name when only the name changes",
+    "Selecting summon in mini binds its own name; main token keeps the player character name",
+    "Other player/installation and GM-protected Stat Bubbles tokens are never renamed",
+    "Unbinding preserves last visible name and stops subsequent name changes",
+    "Unchanged linked names/stats produce no extra scene writes or update loop"
+  ],
+  "errors": []
+}

@@ -14,7 +14,7 @@ for attempt in range(30):
  if attempt==0:print('Waiting for raw main CDN cache to refresh',flush=True)
  time.sleep(6)
 else:raise RuntimeError('Raw update manifest still cached')
-assert json.loads(base64.b64decode(json.loads(stable)['payload']))['version']=='0.28.0'
+assert json.loads(base64.b64decode(json.loads(stable)['payload']))['version']=='0.29.0'
 print('Public release: 9 matching assets; raw automatic update manifest v0.29 verified',flush=True)
 last=None
 for attempt in range(36):
@@ -29,11 +29,11 @@ base='https://feathercatttt.github.io/traveler-folio/'
 for attempt in range(18):
  try:
   card=json.loads(get(base+'manifest.json?t='+str(time.time_ns())));tools=json.loads(get(base+'tools-manifest.json?t='+str(time.time_ns())))
-  if card['version']==tools['version']=='0.28.0':break
+  if card['version']==tools['version']=='0.29.0':break
  except Exception as e:print(type(e).__name__,str(e)[:160],flush=True)
  time.sleep(6)
 else:raise RuntimeError('Pages manifest version not updated yet')
-assert card['action']['popover']=='http://localhost:17632/panel.html?v=0.28.0'
-report={'success':True,'version':'0.28.0','release':release['html_url'],'assets':9,'commit':result['commit'],'pagesWorkflow':run['html_url'],'pagesManifest':card,'toolsManifest':tools,'updateManifestVerified':True};(W/'v28-published-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf8');print('Pages live: v0.29.0; native action mini and separate tools manifest verified',flush=True)
+assert card['action']['popover']=='http://localhost:17632/panel.html?v=0.29.0'
+report={'success':True,'version':'0.29.0','release':release['html_url'],'assets':9,'commit':result['commit'],'pagesWorkflow':run['html_url'],'pagesManifest':card,'toolsManifest':tools,'updateManifestVerified':True};(W/'v29-published-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf8');print('Pages live: v0.29.0; native action mini and separate tools manifest verified',flush=True)
 
-assert tools['action']['popover']=='http://localhost:17632/tools19.html?v=0.28.0'
+assert tools['action']['popover']=='http://localhost:17632/tools19.html?v=0.29.0'
